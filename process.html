@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process — B.K. Neon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+:root{
+  --bg:#0a0a0f;--bg2:#0f0f18;--bg3:#13131e;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);--border-md:rgba(255,255,255,0.14);
+  --pink:#FF2D9B;--pink-glow:rgba(255,45,155,0.28);--pink-glow2:rgba(255,45,155,0.10);
+  --blue:#1E8FFF;--blue-glow:rgba(30,143,255,0.30);--blue-glow2:rgba(30,143,255,0.12);
+  --cyan:#00D4FF;--white:#FFFFFF;--muted:rgba(255,255,255,0.45);
+  --display:'Bebas Neue',sans-serif;--serif:'DM Serif Display',Georgia,serif;--body:'Outfit',sans-serif;
+  --radius:10px;--radius-lg:18px;
+}
+body{background:var(--bg);color:var(--white);font-family:var(--body);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+#cur-dot{position:fixed;z-index:9999;top:0;left:0;width:6px;height:6px;border-radius:50%;background:var(--pink);transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 8px var(--pink);transition:background .3s}
+#cur-ring{position:fixed;z-index:9998;top:0;left:0;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,45,155,.5);transform:translate(-50%,-50%);pointer-events:none;transition:width .3s,height .3s,border-color .3s}
+body.hov #cur-ring{width:48px;height:48px;border-color:var(--blue)}
+body.hov #cur-dot{background:var(--blue);box-shadow:0 0 8px var(--blue)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .4s,padding .3s}
+nav.solid{background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 48px}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-row{display:flex;align-items:center;gap:10px}
+.nav-pip{width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:pipPulse 2.2s ease-in-out infinite}
+@keyframes pipPulse{0%,100%{box-shadow:0 0 8px var(--pink),0 0 20px rgba(255,45,155,.3)}50%{box-shadow:0 0 16px var(--pink),0 0 40px rgba(255,45,155,.55)}}
+.nav-name{font-family:var(--display);font-size:24px;letter-spacing:0.06em}
+.nav-name span{color:var(--pink)}
+.nav-sub{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.32);padding-left:20px;display:flex;align-items:center;gap:7px}
+.nav-sub::before{content:'';display:block;width:18px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);letter-spacing:0.04em;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-links a.active{position:relative}
+.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--blue);box-shadow:0 0 6px var(--blue);border-radius:2px}
+.nav-cta{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)!important;border:1.5px solid rgba(255,255,255,0.5);padding:10px 24px;border-radius:40px;transition:border-color .3s,background .3s,box-shadow .3s!important}
+.nav-cta:hover{border-color:var(--pink)!important;box-shadow:0 0 16px rgba(255,45,155,.3);background:rgba(255,45,155,.08)!important}
+
+.section-wrap{max-width:1200px;margin:0 auto;padding:0 52px}
+
+/* ── PAGE HERO ── */
+.page-header{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 52px 80px;position:relative;overflow:hidden;gap:60px}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:80px 80px;opacity:0.5;pointer-events:none}
+.hero-glow-a{position:absolute;top:-10%;right:-5%;width:55vw;height:70vh;background:radial-gradient(ellipse,rgba(30,143,255,.09) 0%,transparent 70%);pointer-events:none}
+.hero-glow-b{position:absolute;bottom:10%;left:-5%;width:40vw;height:50vh;background:radial-gradient(ellipse,rgba(255,45,155,.07) 0%,transparent 70%);pointer-events:none}
+.ph-left{position:relative;z-index:2}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.ph-eyebrow .pip{width:28px;height:2px;background:var(--blue);box-shadow:0 0 8px var(--blue)}
+.ph-title{font-family:var(--display);font-size:clamp(60px,8vw,120px);line-height:0.88;letter-spacing:0.01em;color:var(--white);margin-bottom:32px}
+.ph-title .accent{color:transparent;-webkit-text-stroke:2px var(--pink);filter:drop-shadow(0 0 16px rgba(255,45,155,.4))}
+.ph-body{font-size:17px;color:var(--muted);line-height:1.85;max-width:480px;margin-bottom:40px}
+.ph-body em{color:var(--white);font-style:normal}
+.ph-stats{display:flex;gap:40px;flex-wrap:wrap}
+.ph-stat strong{display:block;font-family:var(--display);font-size:40px;color:var(--blue);text-shadow:0 0 20px var(--blue-glow);line-height:1}
+.ph-stat span{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero right — schematic SVG */
+.ph-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.process-schematic{width:100%;max-width:480px;position:relative}
+.schematic-svg{width:100%;height:auto;filter:drop-shadow(0 0 20px rgba(30,143,255,.25));animation:schemaPulse 4s ease-in-out infinite}
+@keyframes schemaPulse{0%,100%{filter:drop-shadow(0 0 16px rgba(30,143,255,.2)) drop-shadow(0 0 40px rgba(30,143,255,.08))}50%{filter:drop-shadow(0 0 28px rgba(30,143,255,.35)) drop-shadow(0 0 70px rgba(30,143,255,.14))}}
+
+/* ── STEPS SECTION ── */
+.steps-section{padding:100px 0;border-top:1px solid var(--border)}
+.steps-header{margin-bottom:72px}
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.section-label::before{content:'';width:20px;height:1.5px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.section-title{font-family:var(--display);font-size:clamp(44px,6vw,88px);line-height:0.9;color:var(--white)}
+
+/* Alternating step layout */
+.steps-list{position:relative;display:flex;flex-direction:column;gap:0}
+.steps-list::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);background:linear-gradient(to bottom,transparent,var(--border) 8%,var(--border) 92%,transparent);pointer-events:none}
+.step-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0;padding:56px 0;opacity:0;transform:translateY(30px)}
+.step-row:first-child{padding-top:0}
+.step-row:last-child{padding-bottom:0}
+.step-content{padding:0 48px}
+.step-row:nth-child(odd) .step-content:first-child{text-align:right}
+.step-row:nth-child(odd) .step-content:last-child{display:none}
+.step-row:nth-child(even) .step-content:first-child{display:none}
+.step-row:nth-child(even) .step-content:last-child{text-align:left}
+.step-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0}
+.step-node{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:15px;letter-spacing:0.08em;background:var(--bg);border:2px solid;flex-shrink:0}
+.step-row.blue .step-node{border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 6px var(--bg),0 0 20px rgba(30,143,255,.25)}
+.step-row.pink .step-node{border-color:var(--pink);color:var(--pink);box-shadow:0 0 0 6px var(--bg),0 0 20px rgba(255,45,155,.22)}
+.step-connector{width:1px;height:56px;background:var(--border)}
+.step-row:last-child .step-connector{display:none}
+.step-num{font-family:var(--display);font-size:64px;letter-spacing:-0.02em;line-height:1;margin-bottom:12px}
+.step-row.blue .step-num{color:rgba(30,143,255,.18)}
+.step-row.pink .step-num{color:rgba(255,45,155,.16)}
+.step-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);color:var(--white);margin-bottom:12px;font-weight:400}
+.step-desc{font-size:15px;color:var(--muted);line-height:1.75;max-width:360px}
+.step-row:nth-child(odd) .step-desc{margin-left:auto}
+.step-icon{width:40px;height:40px;border-radius:10px;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.step-row.blue .step-icon{border-color:rgba(30,143,255,.35);color:var(--blue)}
+.step-row.pink .step-icon{border-color:rgba(255,45,155,.3);color:var(--pink)}
+.step-row:nth-child(odd) .step-icon{margin-left:auto}
+
+/* ── WORKFLOW CARDS ── */
+.workflow-section{padding:100px 0;background:rgba(255,255,255,0.02);border-top:1px solid var(--border)}
+.workflow-header{margin-bottom:64px}
+.workflow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.workflow-card{border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,box-shadow .3s;opacity:0;transform:translateY(32px)}
+.workflow-card:hover{border-color:var(--border-md);box-shadow:0 8px 40px rgba(0,0,0,.25)}
+.workflow-card.blue:hover{border-color:rgba(30,143,255,.25);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 28px var(--blue-glow2)}
+.workflow-card.pink:hover{border-color:rgba(255,45,155,.2);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 28px var(--pink-glow2)}
+.wcard-head{padding:28px 28px 20px;border-bottom:1px solid var(--border)}
+.wcard-step-badge{font-family:var(--display);font-size:12px;letter-spacing:0.12em;margin-bottom:12px}
+.workflow-card.blue .wcard-step-badge{color:var(--blue)}
+.workflow-card.pink .wcard-step-badge{color:var(--pink)}
+.wcard-title{font-family:var(--display);font-size:28px;letter-spacing:0.02em;color:var(--white);line-height:1;margin-bottom:4px}
+.wcard-icon{font-size:22px;margin-bottom:10px}
+.wcard-body{padding:20px 28px 0}
+.wcard-bullets{list-style:none;margin-bottom:0}
+.wcard-bullets li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;line-height:1.6}
+.wcard-bullets li::before{content:'';width:4px;height:4px;border-radius:50%;margin-top:7px;flex-shrink:0}
+.workflow-card.blue .wcard-bullets li::before{background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.workflow-card.pink .wcard-bullets li::before{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+.wcard-footer{padding:16px 28px 24px;display:flex;align-items:center;justify-content:space-between}
+.wcard-timeline{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.wcard-timeline::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.workflow-card.blue .wcard-timeline::before{background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.workflow-card.pink .wcard-timeline::before{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+.wcard-tag{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:4px 10px;border-radius:20px}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-block{padding:0 40px;border-right:1px solid var(--border);text-align:center;opacity:0;transform:translateY(24px)}
+.stat-block:last-child{border-right:none}
+.stat-num{font-family:var(--display);font-size:clamp(48px,5vw,72px);line-height:1;margin-bottom:10px}
+.stat-block:nth-child(odd) .stat-num{color:var(--blue);text-shadow:0 0 20px var(--blue-glow)}
+.stat-block:nth-child(even) .stat-num{color:var(--pink);text-shadow:0 0 20px var(--pink-glow)}
+.stat-label{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ── CTA ── */
+.cta-section{padding:130px 0;text-align:center;position:relative;overflow:hidden}
+.cta-blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vh;background:radial-gradient(ellipse,rgba(255,45,155,.07) 0%,rgba(30,143,255,.04) 55%,transparent 80%);pointer-events:none}
+.cta-eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.cta-title{font-family:var(--display);font-size:clamp(52px,8vw,130px);line-height:0.88;letter-spacing:0.01em;color:var(--white);margin-bottom:40px;opacity:0;transform:translateY(40px)}
+.cta-title .neon-word{-webkit-text-stroke:1.5px var(--pink);color:transparent;text-shadow:0 0 30px var(--pink-glow),0 0 60px var(--pink-glow2)}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:20px;opacity:0;transform:translateY(20px)}
+.btn-neon-lg{font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--blue);color:#fff;padding:18px 44px;border-radius:40px;border:none;cursor:pointer;box-shadow:0 4px 20px var(--blue-glow);transition:background 0.3s,box-shadow 0.3s,transform 0.2s}
+.btn-neon-lg:hover{background:#0A7FEF;box-shadow:0 8px 36px rgba(30,143,255,.4);transform:translateY(-2px)}
+.btn-ghost-lg{font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:transparent;padding:18px 44px;border-radius:40px;border:1.5px solid var(--border-md);cursor:pointer;transition:border-color .3s,color .3s}
+.btn-ghost-lg:hover{border-color:rgba(255,255,255,.35);color:var(--white)}
+
+footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64px 52px 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.footer-logo{font-family:var(--display);font-size:32px;letter-spacing:0.1em;color:var(--white);margin-bottom:12px}
+.footer-logo span{color:var(--blue)}
+.footer-sub{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.7}
+.f-col-title{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px}
+.f-links{list-style:none}
+.f-links li{margin-bottom:10px}
+.f-links a{font-size:13px;color:rgba(255,255,255,0.45);transition:color 0.3s}
+.f-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.06em}
+
+@media(max-width:960px){
+  nav{padding:16px 24px}nav.solid{padding:12px 24px}.nav-links{display:none}
+  .section-wrap{padding:0 24px}
+  .page-header{grid-template-columns:1fr;min-height:auto;padding:120px 24px 60px;gap:40px}
+  .ph-right{display:none}
+  .steps-list::before{left:28px;transform:none}
+  .step-row{grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:0 20px;padding:40px 0}
+  .step-center{flex-direction:row;align-items:flex-start}
+  .step-connector{display:none}
+  .step-node{margin-top:4px}
+  .step-row:nth-child(odd) .step-content:first-child{display:none}
+  .step-row:nth-child(even) .step-content:first-child{display:none}
+  .step-row:nth-child(odd) .step-content:last-child{display:block;text-align:left;padding:0}
+  .step-row:nth-child(even) .step-content:last-child{display:block;text-align:left;padding:0}
+  .step-row .step-content.mobile-show{display:block!important;text-align:left!important;padding:0!important;grid-column:2}
+  .step-row:nth-child(odd) .step-num,.step-row:nth-child(even) .step-num{text-align:left}
+  .step-row:nth-child(odd) .step-desc{margin-left:0}
+  .step-row:nth-child(odd) .step-icon{margin-left:0}
+  .workflow-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:0}
+  .stat-block{padding:32px 24px;border-bottom:1px solid var(--border)}
+  .stat-block:nth-child(even){border-right:none}
+  .footer-top{grid-template-columns:1fr 1fr}footer{padding:48px 24px 24px}
+  .cta-actions{flex-direction:column}
+}
+@media(max-width:480px){
+  .ph-title{font-size:54px}
+  .workflow-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-logo-row">
+      <div class="nav-pip"></div>
+      <a href="bkneon-dark (1).html"><span class="nav-name">B.K <span>NEON</span></span></a>
+    </div>
+    <div class="nav-sub">Custom Neon &amp; LED Signage</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="work.html">Work</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="process.html" class="active">Process</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="page-header">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+
+  <div class="ph-left">
+    <p class="ph-eyebrow" id="phEyebrow"><span class="pip"></span> How it works</p>
+    <h1 class="ph-title" id="phTitle">HOW WE BRING<br>YOUR SIGN<br>TO <span class="accent">LIFE.</span></h1>
+    <p class="ph-body" id="phBody">
+      From your first message to the moment your sign lights up — every step is <em>designed around you.</em> Custom design, hand fabrication, and pan-India delivery in as few as 7 days.
+    </p>
+    <div class="ph-stats" id="phStats">
+      <div class="ph-stat"><strong>5</strong><span>Simple steps</span></div>
+      <div class="ph-stat"><strong>7</strong><span>Days avg. delivery</span></div>
+      <div class="ph-stat"><strong>100%</strong><span>Custom every time</span></div>
+    </div>
+  </div>
+
+  <div class="ph-right" id="phRight">
+    <!-- Neon process schematic illustration -->
+    <div class="process-schematic">
+      <svg class="schematic-svg" viewBox="0 0 460 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid dots -->
+        <g opacity="0.18">
+          <circle cx="40" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="120" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="200" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="280" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="360" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="440" cy="40" r="2" fill="#1E8FFF"/>
+          <circle cx="40" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="120" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="200" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="280" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="360" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="440" cy="120" r="2" fill="#1E8FFF"/>
+          <circle cx="40" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="120" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="200" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="280" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="360" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="440" cy="200" r="2" fill="#1E8FFF"/>
+          <circle cx="40" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="120" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="200" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="280" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="360" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="440" cy="280" r="2" fill="#1E8FFF"/>
+          <circle cx="40" cy="360" r="2" fill="#1E8FFF"/>
+          <circle cx="120" cy="360" r="2" fill="#1E8FFF"/>
+          <circle cx="200" cy="360" r="2" fill="#1E8FFF"/>
+          <circle cx="280" cy="360" r="2" fill="#1E8FFF"/>
+          <circle cx="360" cy="360" r="2" fill="#1E8FFF"/>
+          <circle cx="440" cy="360" r="2" fill="#1E8FFF"/>
+        </g>
+        <!-- Connector lines (flow path) -->
+        <path d="M230 60 L230 340" stroke="rgba(30,143,255,0.12)" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- Step 1 node -->
+        <circle cx="230" cy="72" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7" fill="rgba(30,143,255,0.06)"/>
+        <circle cx="230" cy="72" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
+        <text x="230" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.9">01</text>
+        <!-- Step 2 node -->
+        <circle cx="230" cy="144" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65" fill="rgba(255,45,155,0.05)"/>
+        <circle cx="230" cy="144" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none"/>
+        <text x="230" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B" opacity="0.9">02</text>
+        <!-- Step 3 node -->
+        <circle cx="230" cy="216" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7" fill="rgba(30,143,255,0.06)"/>
+        <circle cx="230" cy="216" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
+        <text x="230" y="222" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.9">03</text>
+        <!-- Step 4 node -->
+        <circle cx="230" cy="288" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65" fill="rgba(255,45,155,0.05)"/>
+        <circle cx="230" cy="288" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none"/>
+        <text x="230" y="294" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B" opacity="0.9">04</text>
+        <!-- Step 5 node -->
+        <circle cx="230" cy="360" r="26" stroke="#1E8FFF" stroke-width="2" stroke-opacity="0.85" fill="rgba(30,143,255,0.1)"/>
+        <circle cx="230" cy="360" r="18" stroke="#1E8FFF" stroke-width="0.8" stroke-opacity="0.4" fill="none"/>
+        <text x="230" y="366" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.95">05</text>
+        <!-- Horizontal label lines left -->
+        <line x1="68" y1="72" x2="204" y2="72" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
+        <circle cx="68" cy="72" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
+        <line x1="68" y1="216" x2="204" y2="216" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
+        <circle cx="68" cy="216" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
+        <line x1="68" y1="360" x2="200" y2="360" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
+        <circle cx="68" cy="360" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
+        <!-- Horizontal label lines right -->
+        <line x1="256" y1="144" x2="392" y2="144" stroke="rgba(255,45,155,0.22)" stroke-width="1"/>
+        <circle cx="392" cy="144" r="3" fill="#FF2D9B" fill-opacity="0.45"/>
+        <line x1="256" y1="288" x2="392" y2="288" stroke="rgba(255,45,155,0.22)" stroke-width="1"/>
+        <circle cx="392" cy="288" r="3" fill="#FF2D9B" fill-opacity="0.45"/>
+        <!-- Label texts left -->
+        <text x="60" y="60" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">IDEA</text>
+        <text x="60" y="204" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">APPROVAL</text>
+        <text x="60" y="348" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">DELIVERY</text>
+        <!-- Label texts right -->
+        <text x="400" y="132" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">DESIGN</text>
+        <text x="400" y="276" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">PRODUCTION</text>
+        <!-- Glow highlight on final node -->
+        <circle cx="230" cy="360" r="36" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.2" fill="none"/>
+        <circle cx="230" cy="360" r="50" stroke="#1E8FFF" stroke-width="0.3" stroke-opacity="0.1" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STEP-BY-STEP PROCESS ══ -->
+<section class="steps-section">
+  <div class="section-wrap">
+    <div class="steps-header">
+      <div class="section-label">The process</div>
+      <h2 class="section-title" id="stepsTitle">5 STEPS TO<br>YOUR SIGN</h2>
+    </div>
+    <div class="steps-list" id="stepsList">
+
+      <!-- Step 1 — left -->
+      <div class="step-row blue" id="step0">
+        <div class="step-content">
+          <div class="step-icon">💡</div>
+          <div class="step-num">01</div>
+          <div class="step-title">Idea &amp; Requirement</div>
+          <div class="step-desc">Tell us what you need — a word, a logo, a vibe. Send us a reference, a sketch, or just a message. We handle the rest from scratch.</div>
+        </div>
+        <div class="step-center">
+          <div class="step-node">01</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content mobile-show"></div>
+      </div>
+
+      <!-- Step 2 — right -->
+      <div class="step-row pink" id="step1">
+        <div class="step-content mobile-show"></div>
+        <div class="step-center">
+          <div class="step-connector"></div>
+          <div class="step-node">02</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-icon">🎨</div>
+          <div class="step-num">02</div>
+          <div class="step-title">Design Preview</div>
+          <div class="step-desc">Our design team creates a full digital mockup with exact colours, font, dimensions, and backboard style — free, before you commit.</div>
+        </div>
+      </div>
+
+      <!-- Step 3 — left -->
+      <div class="step-row blue" id="step2">
+        <div class="step-content">
+          <div class="step-icon">✅</div>
+          <div class="step-num">03</div>
+          <div class="step-title">Approval</div>
+          <div class="step-desc">Review your mockup and request any changes — colours, sizing, layout. We iterate until you're fully satisfied, then confirm with a 50% advance.</div>
+        </div>
+        <div class="step-center">
+          <div class="step-connector"></div>
+          <div class="step-node">03</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content mobile-show"></div>
+      </div>
+
+      <!-- Step 4 — right -->
+      <div class="step-row pink" id="step3">
+        <div class="step-content mobile-show"></div>
+        <div class="step-center">
+          <div class="step-connector"></div>
+          <div class="step-node">04</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-icon">⚡</div>
+          <div class="step-num">04</div>
+          <div class="step-title">Production</div>
+          <div class="step-desc">Your sign is hand-fabricated in our Pune workshop — tube bent, LED wired, backboard cut, and tested for full brightness before packing.</div>
+        </div>
+      </div>
+
+      <!-- Step 5 — left -->
+      <div class="step-row blue" id="step4">
+        <div class="step-content">
+          <div class="step-icon">🚚</div>
+          <div class="step-num">05</div>
+          <div class="step-title">Delivery</div>
+          <div class="step-desc">Safely packed and shipped anywhere in India. Local Pune orders can opt for installation by our team. Includes full wiring guide and remote dimmer.</div>
+        </div>
+        <div class="step-center">
+          <div class="step-connector"></div>
+          <div class="step-node">05</div>
+        </div>
+        <div class="step-content mobile-show"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORKFLOW CARDS ══ -->
+<section class="workflow-section">
+  <div class="section-wrap">
+    <div class="workflow-header">
+      <div class="section-label" style="--blue:#1E8FFF">Detailed breakdown</div>
+      <h2 class="section-title" id="workflowTitle">WHAT HAPPENS<br>AT EACH STEP</h2>
+    </div>
+    <div class="workflow-grid">
+
+      <div class="workflow-card blue" id="wcard0">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">STEP 01</div>
+          <div class="wcard-icon">💡</div>
+          <div class="wcard-title">Idea &amp; Requirement</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>Share text, logo, reference images or a rough sketch via WhatsApp or email</li>
+            <li>We confirm size, placement, and colour options with you</li>
+            <li>No commitment needed — first consultation is always free</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">Same day reply</span>
+          <span class="wcard-tag">Free</span>
+        </div>
+      </div>
+
+      <div class="workflow-card pink" id="wcard1">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">STEP 02</div>
+          <div class="wcard-icon">🎨</div>
+          <div class="wcard-title">Design Preview</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>Digital mockup created with accurate colours, font, and dimensions</li>
+            <li>Preview shown on a dark background to simulate real glow effect</li>
+            <li>Revisions included until you're completely happy</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">1–2 days</span>
+          <span class="wcard-tag">Free</span>
+        </div>
+      </div>
+
+      <div class="workflow-card blue" id="wcard2">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">STEP 03</div>
+          <div class="wcard-icon">✅</div>
+          <div class="wcard-title">Approval</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>Final quote issued — no hidden charges or surprise markups</li>
+            <li>Confirm design and pay 50% advance to begin production</li>
+            <li>Production timeline communicated clearly at this stage</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">1 day</span>
+          <span class="wcard-tag">50% advance</span>
+        </div>
+      </div>
+
+      <div class="workflow-card pink" id="wcard3">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">STEP 04</div>
+          <div class="wcard-icon">⚡</div>
+          <div class="wcard-title">Production</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>Neon tube hand-bent or LED flex cut to exact design specifications</li>
+            <li>Acrylic or wooden backboard cut, drilled, and finished in-house</li>
+            <li>Full brightness test and quality check before dispatch</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">3–5 days</span>
+          <span class="wcard-tag">Pune workshop</span>
+        </div>
+      </div>
+
+      <div class="workflow-card blue" id="wcard4">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">STEP 05</div>
+          <div class="wcard-icon">🚚</div>
+          <div class="wcard-title">Delivery</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>Carefully packed with foam lining for safe pan-India shipping</li>
+            <li>Tracking link shared — balance payment collected on delivery</li>
+            <li>Installation guide, remote dimmer, and warranty card included</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">1–2 days shipping</span>
+          <span class="wcard-tag">Pan-India</span>
+        </div>
+      </div>
+
+      <div class="workflow-card pink" id="wcard5">
+        <div class="wcard-head">
+          <div class="wcard-step-badge">AFTER DELIVERY</div>
+          <div class="wcard-icon">🔆</div>
+          <div class="wcard-title">Aftercare</div>
+        </div>
+        <div class="wcard-body">
+          <ul class="wcard-bullets">
+            <li>12-month warranty on LED drivers and all electrical components</li>
+            <li>WhatsApp support for installation questions — always available</li>
+            <li>Pune clients get free on-site service within the warranty period</li>
+          </ul>
+        </div>
+        <div class="wcard-footer">
+          <span class="wcard-timeline">12-month warranty</span>
+          <span class="wcard-tag">Included</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="stats-strip">
+  <div class="section-wrap">
+    <div class="stats-grid">
+      <div class="stat-block" id="stat0">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Signs Installed</div>
+      </div>
+      <div class="stat-block" id="stat1">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Day Avg. Delivery</div>
+      </div>
+      <div class="stat-block" id="stat2">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Custom Design</div>
+      </div>
+      <div class="stat-block" id="stat3">
+        <div class="stat-num">28+</div>
+        <div class="stat-label">Cities Delivered</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="cta-blob"></div>
+  <div class="section-wrap" style="position:relative;z-index:2">
+    <p class="cta-eyebrow" id="ctaEyebrow">Start your project today</p>
+    <h2 class="cta-title" id="ctaTitle">READY TO LIGHT UP<br>YOUR <span class="neon-word">BRAND?</span></h2>
+    <div class="cta-actions" id="ctaActions">
+      <button class="btn-neon-lg">Get Quote on WhatsApp</button>
+      <a href="work.html" class="btn-ghost-lg">View Our Work</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">B.K.<span> NEON</span></div><p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p></div>
+    <div><div class="f-col-title">Services</div><ul class="f-links"><li><a href="#">Custom Neon Signs</a></li><li><a href="#">LED Sign Boards</a></li><li><a href="#">Shop Signage</a></li><li><a href="#">Wedding Neon</a></li><li><a href="#">Event Decor</a></li></ul></div>
+    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ duration: 1.35, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const dot = document.getElementById('cur-dot'), ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; gsap.to(dot,{x:mx,y:my,duration:0.06}); });
+(function lerp(){ rx+=(mx-rx)*0.11; ry+=(my-ry)*0.11; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(lerp); })();
+document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>document.body.classList.add('hov')); el.addEventListener('mouseleave',()=>document.body.classList.remove('hov')); });
+
+const nav=document.getElementById('nav'); let lastY=0;
+lenis.on('scroll',({scroll})=>{ nav.classList.toggle('solid',scroll>60); if(scroll>lastY&&scroll>120) gsap.to(nav,{y:-80,duration:0.45,ease:'power2.inOut'}); else gsap.to(nav,{y:0,duration:0.38,ease:'power2.out'}); lastY=scroll; });
+
+/* Hero entrance */
+gsap.set(['#phEyebrow','#phTitle','#phBody','#phStats'],{opacity:0,y:20});
+const heroTl = gsap.timeline({delay:0.1});
+heroTl
+  .to('#phEyebrow',{opacity:1,y:0,duration:0.6,ease:'power3.out'})
+  .to('#phTitle',{opacity:1,y:0,duration:0.9,ease:'power4.out'},0.1)
+  .to('#phBody',{opacity:1,y:0,duration:0.8,ease:'power3.out'},0.45)
+  .to('#phStats',{opacity:1,y:0,duration:0.7,ease:'power3.out'},0.65);
+gsap.from('#phRight',{x:60,opacity:0,duration:1.2,ease:'power3.out',delay:0.4});
+
+/* Glow parallax */
+gsap.to('.hero-glow-a',{yPercent:-20,ease:'none',scrollTrigger:{trigger:'.page-header',start:'top top',end:'bottom top',scrub:2}});
+gsap.to('.hero-glow-b',{yPercent:-14,ease:'none',scrollTrigger:{trigger:'.page-header',start:'top top',end:'bottom top',scrub:2.5}});
+
+/* Steps section header */
+const fu = (id,delay=0) => { gsap.set(id,{opacity:0,y:24}); gsap.to(id,{opacity:1,y:0,duration:0.9,delay,ease:'power3.out',scrollTrigger:{trigger:id,start:'top 82%'}}); };
+fu('#stepsTitle',0);
+
+/* Step rows stagger */
+['#step0','#step1','#step2','#step3','#step4'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,y:0,duration:0.85,ease:'power3.out',delay:i*0.06,scrollTrigger:{trigger:id,start:'top 82%'}});
+});
+
+/* Workflow cards */
+fu('#workflowTitle',0);
+['#wcard0','#wcard1','#wcard2','#wcard3','#wcard4','#wcard5'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,y:0,duration:0.75,ease:'power3.out',delay:(i%3)*0.12,scrollTrigger:{trigger:'.workflow-grid',start:'top 80%'}});
+});
+
+/* Stats */
+['#stat0','#stat1','#stat2','#stat3'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,y:0,duration:0.8,ease:'power3.out',delay:i*0.1,scrollTrigger:{trigger:'.stats-grid',start:'top 82%'}});
+});
+
+/* CTA */
+gsap.set('#ctaEyebrow',{opacity:0,y:12}); gsap.set('#ctaTitle',{opacity:0,y:40}); gsap.set('#ctaActions',{opacity:0,y:24});
+gsap.timeline({scrollTrigger:{trigger:'.cta-section',start:'top 75%'}})
+  .to('#ctaEyebrow',{opacity:1,y:0,duration:0.7,ease:'power3.out'})
+  .to('#ctaTitle',{opacity:1,y:0,duration:1.0,ease:'power3.out'},'-=0.4')
+  .to('#ctaActions',{opacity:1,y:0,duration:0.8,ease:'power3.out'},'-=0.5');
+gsap.to('.cta-blob',{yPercent:-18,ease:'none',scrollTrigger:{trigger:'.cta-section',start:'top bottom',end:'bottom top',scrub:2}});
+</script>
+</body>
+</html>
