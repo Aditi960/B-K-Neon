@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — B.K. Neon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+:root{
+  --bg:#0a0a0f;--bg2:#0f0f18;--bg3:#13131e;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);--border-md:rgba(255,255,255,0.14);
+  --pink:#FF2D9B;--pink-glow:rgba(255,45,155,0.28);--pink-glow2:rgba(255,45,155,0.10);
+  --blue:#1E8FFF;--blue-glow:rgba(30,143,255,0.30);--blue-glow2:rgba(30,143,255,0.12);
+  --cyan:#00D4FF;--white:#FFFFFF;--muted:rgba(255,255,255,0.45);
+  --display:'Bebas Neue',sans-serif;--serif:'DM Serif Display',Georgia,serif;--body:'Outfit',sans-serif;
+  --radius:10px;--radius-lg:18px;
+}
+body{background:var(--bg);color:var(--white);font-family:var(--body);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+#cur-dot{position:fixed;z-index:9999;top:0;left:0;width:6px;height:6px;border-radius:50%;background:var(--pink);transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 8px var(--pink);transition:background .3s}
+#cur-ring{position:fixed;z-index:9998;top:0;left:0;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,45,155,.5);transform:translate(-50%,-50%);pointer-events:none;transition:width .3s,height .3s,border-color .3s}
+body.hov #cur-ring{width:48px;height:48px;border-color:var(--blue)}
+body.hov #cur-dot{background:var(--blue);box-shadow:0 0 8px var(--blue)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .4s,padding .3s}
+nav.solid{background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 48px}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-row{display:flex;align-items:center;gap:10px}
+.nav-pip{width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:pipPulse 2.2s ease-in-out infinite}
+@keyframes pipPulse{0%,100%{box-shadow:0 0 8px var(--pink),0 0 20px rgba(255,45,155,.3)}50%{box-shadow:0 0 16px var(--pink),0 0 40px rgba(255,45,155,.55)}}
+.nav-name{font-family:var(--display);font-size:24px;letter-spacing:0.06em}
+.nav-name span{color:var(--pink)}
+.nav-sub{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.32);padding-left:20px;display:flex;align-items:center;gap:7px}
+.nav-sub::before{content:'';display:block;width:18px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);letter-spacing:0.04em;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-links a.active{position:relative}
+.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--blue);box-shadow:0 0 6px var(--blue);border-radius:2px}
+.nav-cta{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)!important;border:1.5px solid rgba(255,255,255,0.5);padding:10px 24px;border-radius:40px;transition:border-color .3s,background .3s,box-shadow .3s!important}
+.nav-cta:hover{border-color:var(--pink)!important;box-shadow:0 0 16px rgba(255,45,155,.3);background:rgba(255,45,155,.08)!important}
+
+.section-wrap{max-width:1200px;margin:0 auto;padding:0 52px}
+
+/* Page Header */
+.page-header{padding:160px 0 80px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:80px 80px;opacity:0.4;pointer-events:none}
+.page-header-glow{position:absolute;top:-20%;left:-10%;width:60vw;height:80vh;background:radial-gradient(ellipse,rgba(255,45,155,.07) 0%,transparent 70%);pointer-events:none}
+.page-header-glow2{position:absolute;top:10%;right:-10%;width:50vw;height:70vh;background:radial-gradient(ellipse,rgba(30,143,255,.07) 0%,transparent 70%);pointer-events:none}
+.page-header-inner{position:relative;z-index:2}
+.page-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.page-eyebrow .pip{width:28px;height:2px;background:var(--pink);box-shadow:0 0 8px var(--pink)}
+.page-title{font-family:var(--display);font-size:clamp(64px,10vw,140px);line-height:0.88;letter-spacing:0.01em;color:var(--white)}
+.page-title .accent{color:transparent;-webkit-text-stroke:2px var(--pink);filter:drop-shadow(0 0 16px rgba(255,45,155,.4))}
+.page-subtitle{max-width:520px;font-size:16px;color:var(--muted);line-height:1.8;margin-top:28px}
+
+/* Category tabs */
+.cat-tabs{display:flex;align-items:center;gap:8px;padding:0 0 60px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:64px}
+.cat-tab{font-family:var(--body);font-size:13px;font-weight:400;letter-spacing:0.06em;color:var(--muted);background:transparent;border:1px solid var(--border-md);padding:10px 24px;border-radius:40px;cursor:pointer;transition:all 0.3s}
+.cat-tab:hover{color:var(--white);border-color:rgba(255,255,255,0.3)}
+.cat-tab.active{color:#fff;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.25)}
+.cat-tab.active:hover{background:var(--pink);border-color:var(--pink);box-shadow:0 4px 16px var(--pink-glow)}
+
+/* Category section */
+.cat-section{margin-bottom:80px}
+.cat-section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.cat-section-title{font-family:var(--display);font-size:clamp(36px,5vw,64px);line-height:0.9;color:var(--white)}
+.cat-section-title .dim{color:rgba(255,255,255,0.2)}
+.cat-badge{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border-md);padding:6px 14px;border-radius:20px;margin-bottom:4px;display:inline-block}
+
+/* Product grid */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.product-card{border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s;opacity:0;transform:translateY(40px);cursor:pointer;position:relative}
+.product-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.35),0 0 0 1px var(--border-md)}
+.product-card.blue:hover{box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 30px var(--blue-glow),0 0 0 1px rgba(30,143,255,0.25)}
+.product-card.pink:hover{box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 30px var(--pink-glow),0 0 0 1px rgba(255,45,155,0.2)}
+.product-card.featured{grid-column:span 2}
+.product-card.featured .card-img-wrap{aspect-ratio:16/7}
+
+.card-img-wrap{width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-neon-preview{display:flex;align-items:center;justify-content:center;width:100%;height:100%;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)}
+.product-card:hover .card-neon-preview{transform:scale(1.05)}
+.neon-sign-svg{width:80%;max-width:280px;filter:drop-shadow(0 0 8px currentColor);transition:filter 0.4s}
+.product-card:hover .neon-sign-svg{filter:drop-shadow(0 0 18px currentColor) drop-shadow(0 0 40px currentColor)}
+
+/* Price ribbon */
+.card-ribbon{position:absolute;top:16px;right:16px;background:rgba(10,10,15,0.8);backdrop-filter:blur(8px);border:1px solid var(--border-md);border-radius:20px;padding:5px 12px;font-family:var(--display);font-size:16px;letter-spacing:0.04em;color:var(--white)}
+.card-ribbon.blue{border-color:rgba(30,143,255,.3);color:var(--blue)}
+.card-ribbon.pink{border-color:rgba(255,45,155,.3);color:var(--pink)}
+
+.card-body{padding:22px 24px 0;border-top:1px solid var(--border)}
+.card-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.card-name{font-family:var(--display);font-size:26px;letter-spacing:0.02em;color:var(--white);margin-bottom:6px;line-height:1}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.65;padding-bottom:20px}
+.card-footer{padding:0 24px 22px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.card-price{font-family:var(--display);font-size:22px;letter-spacing:0.03em;color:var(--white);padding-top:16px}
+.card-btn{margin-top:16px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);background:rgba(255,255,255,0.06);border:1px solid var(--border-md);padding:8px 18px;border-radius:30px;transition:background 0.3s,border-color 0.3s,color 0.3s,box-shadow 0.3s;cursor:pointer}
+.product-card.blue .card-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 20px var(--blue-glow)}
+.product-card.pink .card-btn:hover{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 0 20px var(--pink-glow)}
+
+/* Features list on some cards */
+.card-features{list-style:none;padding:0 24px 20px}
+.card-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue);box-shadow:0 0 6px var(--blue);flex-shrink:0}
+.product-card.pink .card-features li::before{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+
+/* Process strip */
+.process-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0;margin:60px 0}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.process-step{padding:0 48px;border-right:1px solid var(--border);text-align:center;opacity:0;transform:translateY(24px)}
+.process-step:last-child{border-right:none}
+.process-num{font-family:var(--display);font-size:56px;color:var(--blue-glow);margin-bottom:16px;line-height:1}
+.process-title{font-family:var(--serif);font-size:22px;color:var(--white);margin-bottom:10px}
+.process-desc{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* CTA section */
+.cta-section{padding:120px 0;text-align:center;position:relative;overflow:hidden}
+.cta-blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vh;background:radial-gradient(ellipse,rgba(255,45,155,.07) 0%,rgba(30,143,255,.04) 60%,transparent 80%);pointer-events:none}
+.cta-eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.cta-title{font-family:var(--display);font-size:clamp(52px,8vw,130px);line-height:0.88;letter-spacing:0.01em;color:var(--white);margin-bottom:40px;opacity:0;transform:translateY(40px)}
+.cta-title .neon-word{-webkit-text-stroke:1.5px var(--pink);color:transparent;text-shadow:0 0 30px var(--pink-glow),0 0 60px var(--pink-glow2)}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:20px;opacity:0;transform:translateY(20px)}
+.btn-neon-lg{font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--blue);color:#fff;padding:18px 44px;border-radius:40px;border:none;cursor:pointer;box-shadow:0 4px 20px var(--blue-glow);transition:background 0.3s,box-shadow 0.3s,transform 0.2s}
+.btn-neon-lg:hover{background:#0A7FEF;box-shadow:0 8px 36px rgba(30,143,255,.4);transform:translateY(-2px)}
+.btn-outline-lg{font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);background:transparent;padding:18px 44px;border-radius:40px;border:1.5px solid var(--border-md);cursor:pointer;transition:border-color 0.3s,background 0.3s}
+.btn-outline-lg:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.04)}
+
+footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64px 52px 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.footer-logo{font-family:var(--display);font-size:32px;letter-spacing:0.1em;color:var(--white);margin-bottom:12px}
+.footer-logo span{color:var(--blue)}
+.footer-sub{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.7}
+.f-col-title{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px}
+.f-links{list-style:none}
+.f-links li{margin-bottom:10px}
+.f-links a{font-size:13px;color:rgba(255,255,255,0.45);transition:color 0.3s}
+.f-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.06em}
+
+@media(max-width:960px){
+  nav{padding:16px 24px}nav.solid{padding:12px 24px}.nav-links{display:none}
+  .section-wrap{padding:0 24px}.page-header{padding:130px 0 60px}
+  .product-grid{grid-template-columns:1fr}.product-card.featured{grid-column:span 1}.product-card.featured .card-img-wrap{aspect-ratio:4/3}
+  .process-grid{grid-template-columns:1fr;gap:48px}.process-step{border-right:none;padding:0}
+  .footer-top{grid-template-columns:1fr 1fr}footer{padding:48px 24px 24px}
+  .cta-actions{flex-direction:column}
+}
+@media(max-width:480px){.page-title{font-size:54px}}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-logo-row">
+      <div class="nav-pip"></div>
+      <a href="bkneon-dark.html"><span class="nav-name">B.K <span>NEON</span></span></a>
+    </div>
+    <div class="nav-sub">Custom Neon &amp; LED Signage</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="work.html">Work</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="bkneon-dark.html#howItWorks">Process</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-glow"></div>
+  <div class="page-header-glow2"></div>
+  <div class="section-wrap">
+    <div class="page-header-inner">
+      <p class="page-eyebrow" id="pageEyebrow"><span class="pip"></span> What we make</p>
+      <h1 class="page-title" id="pageTitle">OUR<br><span class="accent">PRODUCTS</span></h1>
+      <p class="page-subtitle" id="pageSubtitle">From custom script neons to full LED shop fronts — every piece is hand-fabricated in Pune and delivered across India. Browse our range and get a quote in minutes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div id="productsWrap">
+<section style="padding-bottom:0">
+  <div class="section-wrap">
+
+    <!-- Category tabs -->
+    <div class="cat-tabs" id="catTabs">
+      <button class="cat-tab active" data-cat="all">All Products</button>
+      <button class="cat-tab" data-cat="neon">Custom Neon</button>
+      <button class="cat-tab" data-cat="led">LED Signs</button>
+      <button class="cat-tab" data-cat="wedding">Weddings</button>
+      <button class="cat-tab" data-cat="decor">Decor &amp; Gifting</button>
+    </div>
+
+    <!-- SECTION: CUSTOM NEON -->
+    <div class="cat-section" data-section="neon" id="secNeon">
+      <div class="cat-section-header">
+        <div>
+          <div class="cat-badge">Custom Neon</div>
+          <div class="cat-section-title">NEON <span class="dim">SIGNS</span></div>
+        </div>
+      </div>
+      <div class="product-grid">
+
+        <!-- Featured: Custom Brand Sign -->
+        <div class="product-card featured blue pcard" id="pcard0">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 340 80" fill="none" color="#1E8FFF">
+                <text x="170" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="64" fill="none" stroke="#1E8FFF" stroke-width="1.6" opacity="0.9">CAFÉ MOCHA</text>
+                <text x="170" y="62" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="64" fill="none" stroke="#1E8FFF" stroke-width="0.5" opacity="0.3">CAFÉ MOCHA</text>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹4,500</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Commercial · Cafés · Retail</div>
+            <div class="card-name">Custom Brand Sign</div>
+            <div class="card-desc">Your business name, logo, or slogan recreated as a glowing neon — mounted on clear or black acrylic backboard. Includes installation guide and remote dimmer.</div>
+          </div>
+          <ul class="card-features">
+            <li>Any font or logo shape possible</li>
+            <li>Available in 10+ neon colours</li>
+            <li>Indoor &amp; outdoor variants</li>
+            <li>Delivery: 7–10 days</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹4,500</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <!-- Script Neon -->
+        <div class="product-card pink pcard" id="pcard1">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 70" fill="none" color="#FF2D9B">
+                <text x="100" y="52" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="46" fill="none" stroke="#FF2D9B" stroke-width="1.3" font-style="italic" opacity="0.9">Forever</text>
+                <text x="100" y="52" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="46" fill="none" stroke="#FF2D9B" stroke-width="0.4" font-style="italic" opacity="0.3">Forever</text>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹3,200</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Events · Weddings · Decor</div>
+            <div class="card-name">Script Neon</div>
+            <div class="card-desc">Flowing handwritten-style lettering in elegant cursive. Perfect for backdrops, home walls, and gift pieces. Comes boxed with hanging kit.</div>
+          </div>
+          <ul class="card-features">
+            <li>Cursive &amp; script fonts</li>
+            <li>Custom text up to 30 chars</li>
+            <li>Gift-ready packaging available</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹3,200</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <!-- Logo Neon -->
+        <div class="product-card blue pcard" id="pcard2">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#1E8FFF">
+                <polygon points="100,10 120,40 155,45 130,68 136,100 100,82 64,100 70,68 45,45 80,40" fill="none" stroke="#1E8FFF" stroke-width="1.8" opacity="0.85"/>
+                <polygon points="100,10 120,40 155,45 130,68 136,100 100,82 64,100 70,68 45,45 80,40" fill="none" stroke="#1E8FFF" stroke-width="0.5" opacity="0.3"/>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹5,500</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Branding · Office · Retail</div>
+            <div class="card-name">Logo Neon</div>
+            <div class="card-desc">Your exact brand logo bent in neon — ideal for office receptions, retail walls, and brand activations. We trace your logo precisely.</div>
+          </div>
+          <ul class="card-features">
+            <li>Traced from your brand file</li>
+            <li>Sizes from 1ft to 8ft wide</li>
+            <li>Wall or freestanding options</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹5,500</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION: LED SIGNS -->
+    <div class="cat-section" data-section="led" id="secLed">
+      <div class="cat-section-header">
+        <div>
+          <div class="cat-badge">LED Signs</div>
+          <div class="cat-section-title">LED <span class="dim">BOARDS</span></div>
+        </div>
+      </div>
+      <div class="product-grid">
+
+        <!-- LED Sign Board - featured -->
+        <div class="product-card featured blue pcard" id="pcard3">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 320 90" fill="none" color="#1E8FFF">
+                <rect x="10" y="8" width="300" height="74" rx="12" fill="none" stroke="#1E8FFF" stroke-width="1.5" opacity="0.5"/>
+                <text x="160" y="60" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="48" fill="none" stroke="#1E8FFF" stroke-width="1.4" opacity="0.9">OPEN 24/7</text>
+                <text x="160" y="60" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="48" fill="none" stroke="#1E8FFF" stroke-width="0.4" opacity="0.3">OPEN 24/7</text>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹2,800</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Retail · Shops · Commercial</div>
+            <div class="card-name">LED Sign Board</div>
+            <div class="card-desc">High-brightness LED channel lettering on acrylic or metal panels. Weatherproof, energy-efficient, and visible in direct sunlight. Ideal for shop fronts and corporate signage.</div>
+          </div>
+          <ul class="card-features">
+            <li>Weatherproof (IP65 rated)</li>
+            <li>Day &amp; night visibility</li>
+            <li>Single or multi-colour</li>
+            <li>Professional installation available</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹2,800</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <!-- LED Backlit -->
+        <div class="product-card blue pcard" id="pcard4">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#1E8FFF">
+                <rect x="10" y="10" width="180" height="80" rx="10" fill="rgba(30,143,255,0.06)" stroke="#1E8FFF" stroke-width="1" opacity="0.5"/>
+                <text x="100" y="64" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="38" fill="#1E8FFF" opacity="0.85">SALON</text>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹3,500</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Salons · Clinics · Spas</div>
+            <div class="card-name">LED Backlit Panel</div>
+            <div class="card-desc">Frosted acrylic panels with edge-lit or backlit LED illumination — a sleek, premium finish for modern businesses.</div>
+          </div>
+          <ul class="card-features">
+            <li>Frosted or clear acrylic</li>
+            <li>Dimmable LED strips</li>
+            <li>Slim wall-mount profile</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹3,500</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <!-- 3D Channel Letters -->
+        <div class="product-card pink pcard" id="pcard5">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 80" fill="none" color="#FF2D9B">
+                <text x="100" y="58" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="52" fill="none" stroke="#FF2D9B" stroke-width="1.5" opacity="0.9">STYLE</text>
+                <text x="100" y="58" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="52" fill="none" stroke="#FF2D9B" stroke-width="0.4" opacity="0.3">STYLE</text>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹6,000</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Premium · 3D · Facade</div>
+            <div class="card-name">3D Channel Letters</div>
+            <div class="card-desc">Bold, three-dimensional letters with internal LED lighting — the ultimate storefront statement that stands out day and night.</div>
+          </div>
+          <ul class="card-features">
+            <li>Metal or acrylic construction</li>
+            <li>Front-lit, halo, or combo</li>
+            <li>Sizes up to 2ft letter height</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹6,000</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION: WEDDINGS -->
+    <div class="cat-section" data-section="wedding" id="secWedding">
+      <div class="cat-section-header">
+        <div>
+          <div class="cat-badge">Weddings &amp; Events</div>
+          <div class="cat-section-title">WEDDING <span class="dim">NEON</span></div>
+        </div>
+      </div>
+      <div class="product-grid">
+
+        <div class="product-card pink pcard" id="pcard6">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 240 80" fill="none" color="#FF2D9B">
+                <text x="120" y="56" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="40" fill="none" stroke="#FF2D9B" stroke-width="1.3" font-style="italic" opacity="0.9">& forever</text>
+                <text x="120" y="56" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="40" fill="none" stroke="#FF2D9B" stroke-width="0.4" font-style="italic" opacity="0.3">& forever</text>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹3,200</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Wedding · Reception</div>
+            <div class="card-name">Wedding Script Sign</div>
+            <div class="card-desc">Romantic cursive signs for the wedding backdrop, stage, or entrance. Customise with your names, date, or favourite phrase.</div>
+          </div>
+          <ul class="card-features">
+            <li>Custom names &amp; dates</li>
+            <li>Hire or purchase available</li>
+            <li>Delivery + setup support</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹3,200</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <div class="product-card pink pcard" id="pcard7">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#FF2D9B">
+                <path d="M100 80 C60 55, 20 40, 20 22 C20 8 32 0 46 0 C58 0 70 8 100 30 C130 8 142 0 154 0 C168 0 180 8 180 22 C180 40 140 55 100 80Z" fill="none" stroke="#FF2D9B" stroke-width="2" opacity="0.9"/>
+                <path d="M100 80 C60 55, 20 40, 20 22 C20 8 32 0 46 0 C58 0 70 8 100 30 C130 8 142 0 154 0 C168 0 180 8 180 22 C180 40 140 55 100 80Z" fill="none" stroke="#FF2D9B" stroke-width="0.5" opacity="0.3"/>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹2,200</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Engagement · Anniversary</div>
+            <div class="card-name">Heart Neon</div>
+            <div class="card-desc">Classic glowing heart — the perfect photo-backdrop piece for engagements, anniversaries, and Valentine's events.</div>
+          </div>
+          <ul class="card-features">
+            <li>Multiple sizes available</li>
+            <li>Wall mount or table stand</li>
+            <li>Gift-ready with box</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹2,200</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <div class="product-card blue pcard" id="pcard8">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#1E8FFF">
+                <text x="100" y="42" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="36" fill="none" stroke="#1E8FFF" stroke-width="1.4" opacity="0.9">PRIYA</text>
+                <text x="100" y="42" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="36" fill="none" stroke="#1E8FFF" stroke-width="0.4" opacity="0.3">PRIYA</text>
+                <line x1="40" y1="56" x2="160" y2="56" stroke="#FF2D9B" stroke-width="1.5" opacity="0.6"/>
+                <text x="100" y="82" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="36" fill="none" stroke="#1E8FFF" stroke-width="1.4" opacity="0.9">ARJUN</text>
+                <text x="100" y="82" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="36" fill="none" stroke="#1E8FFF" stroke-width="0.4" opacity="0.3">ARJUN</text>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹3,800</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Couple · Mehendi · Sangeet</div>
+            <div class="card-name">Couple Name Sign</div>
+            <div class="card-desc">Both names in neon — a stunning stage backdrop that doubles as a keepsake. Customise with dates and a small decorative element.</div>
+          </div>
+          <ul class="card-features">
+            <li>Any two names, any language</li>
+            <li>With or without date</li>
+            <li>Freestanding frame included</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹3,800</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION: DECOR & GIFTING -->
+    <div class="cat-section" data-section="decor" id="secDecor">
+      <div class="cat-section-header">
+        <div>
+          <div class="cat-badge">Decor &amp; Gifting</div>
+          <div class="cat-section-title">DECOR <span class="dim">&amp; GIFTS</span></div>
+        </div>
+      </div>
+      <div class="product-grid">
+
+        <div class="product-card pink pcard" id="pcard9">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 220 60" fill="none" color="#FF2D9B">
+                <text x="110" y="48" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="40" fill="none" stroke="#FF2D9B" stroke-width="1.2" font-style="italic" opacity="0.9">good vibes</text>
+                <text x="110" y="48" text-anchor="middle" font-family="'DM Serif Display',serif" font-size="40" fill="none" stroke="#FF2D9B" stroke-width="0.4" font-style="italic" opacity="0.3">good vibes</text>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹2,600</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Home Decor · Wall Art</div>
+            <div class="card-name">Quote Sign</div>
+            <div class="card-desc">Short phrases, mantras, or favourite quotes in glowing neon — a room-defining statement piece for living rooms, cafés, and studios.</div>
+          </div>
+          <ul class="card-features">
+            <li>Up to 25 characters</li>
+            <li>Multiple font styles</li>
+            <li>USB-powered option available</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹2,600</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <div class="product-card blue pcard" id="pcard10">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#1E8FFF">
+                <path d="M80 220 C40 190, 10 160, 10 120 C10 80 30 50 50 30 C65 15 75 10 80 50 C85 10 95 15 110 30 C130 50 150 80 150 120 C150 160 120 190 80 220Z" transform="scale(0.55) translate(65,5)" fill="none" stroke="#1E8FFF" stroke-width="2.2" opacity="0.9"/>
+                <path d="M80 220 C40 190, 10 160, 10 120 C10 80 30 50 50 30 C65 15 75 10 80 50 C85 10 95 15 110 30 C130 50 150 80 150 120 C150 160 120 190 80 220Z" transform="scale(0.55) translate(65,5)" fill="none" stroke="#1E8FFF" stroke-width="0.6" opacity="0.3"/>
+              </svg>
+            </div>
+            <div class="card-ribbon blue">From ₹2,000</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Gifting · Symbol</div>
+            <div class="card-name">Symbol &amp; Shape</div>
+            <div class="card-desc">Flames, stars, arrows, lightning bolts — custom neon shapes that make unique gifts for birthdays, housewarming, and celebrations.</div>
+          </div>
+          <ul class="card-features">
+            <li>Dozens of shapes available</li>
+            <li>Gift box with ribbon</li>
+            <li>COD &amp; pan-India delivery</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹2,000</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+        <div class="product-card pink pcard" id="pcard11">
+          <div class="card-img-wrap">
+            <div class="card-neon-preview">
+              <svg class="neon-sign-svg" viewBox="0 0 200 80" fill="none" color="#FF2D9B">
+                <text x="100" y="56" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="52" fill="none" stroke="#FF2D9B" stroke-width="1.5" opacity="0.9">HAPPY</text>
+                <text x="100" y="56" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="52" fill="none" stroke="#FF2D9B" stroke-width="0.4" opacity="0.3">HAPPY</text>
+              </svg>
+            </div>
+            <div class="card-ribbon pink">From ₹2,400</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tag">Birthday · Celebration</div>
+            <div class="card-name">Party Neon</div>
+            <div class="card-desc">Glowing party signs for birthdays, baby showers, and milestone celebrations. Available for hire or purchase — bring the glow to any party.</div>
+          </div>
+          <ul class="card-features">
+            <li>Hire or buy option</li>
+            <li>Delivery &amp; pickup available</li>
+            <li>Battery-powered versions</li>
+          </ul>
+          <div class="card-footer">
+            <span class="card-price">From ₹2,400</span>
+            <button class="card-btn">Get a Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /section-wrap -->
+</section>
+</div>
+
+<!-- PROCESS STRIP -->
+<div class="process-strip">
+  <div class="section-wrap">
+    <div class="process-grid">
+      <div class="process-step" id="pstep0">
+        <div class="process-num">01</div>
+        <div class="process-title">Share your idea</div>
+        <div class="process-desc">Send us your logo, text, or reference on WhatsApp. We'll reply within hours with initial thoughts and sizing options.</div>
+      </div>
+      <div class="process-step" id="pstep1">
+        <div class="process-num">02</div>
+        <div class="process-title">Get your mockup</div>
+        <div class="process-desc">We create a digital preview of your sign with exact colours and dimensions — free of charge before you confirm.</div>
+      </div>
+      <div class="process-step" id="pstep2">
+        <div class="process-num">03</div>
+        <div class="process-title">We build &amp; deliver</div>
+        <div class="process-desc">Your sign is handcrafted in our Pune workshop and safely delivered anywhere in India within 7–10 days.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-blob"></div>
+  <div class="section-wrap" style="position:relative;z-index:2">
+    <p class="cta-eyebrow" id="ctaEyebrow">Start your project today</p>
+    <h2 class="cta-title" id="ctaTitle">READY TO<br><span class="neon-word">GLOW?</span></h2>
+    <div class="cta-actions" id="ctaActions">
+      <button class="btn-neon-lg">Chat on WhatsApp</button>
+      <button class="btn-outline-lg">View Our Work</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">B.K.<span> NEON</span></div><p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p></div>
+    <div><div class="f-col-title">Products</div><ul class="f-links"><li><a href="#">Custom Neon Signs</a></li><li><a href="#">LED Sign Boards</a></li><li><a href="#">Wedding Neon</a></li><li><a href="#">Decor &amp; Gifting</a></li><li><a href="#">3D Channel Letters</a></li></ul></div>
+    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ duration: 1.35, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const dot = document.getElementById('cur-dot'), ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; gsap.to(dot,{x:mx,y:my,duration:0.06}); });
+(function lerp(){ rx+=(mx-rx)*0.11; ry+=(my-ry)*0.11; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(lerp); })();
+document.querySelectorAll('a,button,.product-card').forEach(el => { el.addEventListener('mouseenter',()=>document.body.classList.add('hov')); el.addEventListener('mouseleave',()=>document.body.classList.remove('hov')); });
+
+const nav=document.getElementById('nav'); let lastY=0;
+lenis.on('scroll',({scroll})=>{ nav.classList.toggle('solid',scroll>60); if(scroll>lastY&&scroll>120) gsap.to(nav,{y:-80,duration:0.45,ease:'power2.inOut'}); else gsap.to(nav,{y:0,duration:0.38,ease:'power2.out'}); lastY=scroll; });
+
+/* Page header */
+gsap.set('#pageEyebrow',{opacity:0,y:14}); gsap.set('#pageTitle',{opacity:0,y:30}); gsap.set('#pageSubtitle',{opacity:0,y:20});
+gsap.timeline({delay:0.1}).to('#pageEyebrow',{opacity:1,y:0,duration:0.6,ease:'power3.out'}).to('#pageTitle',{opacity:1,y:0,duration:0.8,ease:'power3.out'},0.08).to('#pageSubtitle',{opacity:1,y:0,duration:0.7,ease:'power3.out'},0.25);
+
+/* Product cards stagger */
+document.querySelectorAll('.pcard').forEach((card,i) => {
+  gsap.to(card, { opacity:1, y:0, duration:0.75, ease:'power3.out', delay:(i%3)*0.1, scrollTrigger:{ trigger:card, start:'top 85%' } });
+});
+
+/* Category filter */
+const catTabs = document.querySelectorAll('.cat-tab');
+const sections = document.querySelectorAll('.cat-section');
+catTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    catTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat = tab.dataset.cat;
+    sections.forEach(sec => {
+      if(cat === 'all' || sec.dataset.section === cat) {
+        sec.style.display = '';
+        gsap.fromTo(sec, {opacity:0,y:20}, {opacity:1,y:0,duration:0.5,ease:'power3.out'});
+      } else {
+        gsap.to(sec, {opacity:0,y:-10,duration:0.2,ease:'power2.in',onComplete:()=>{ sec.style.display='none'; }});
+      }
+    });
+  });
+});
+
+/* Process steps */
+['#pstep0','#pstep1','#pstep2'].forEach((id,i) => { gsap.to(id,{opacity:1,y:0,duration:0.8,ease:'power3.out',delay:i*0.15,scrollTrigger:{trigger:'.process-strip',start:'top 80%'}}); });
+
+/* CTA */
+gsap.set('#ctaEyebrow',{opacity:0,y:12}); gsap.set('#ctaTitle',{opacity:0,y:40}); gsap.set('#ctaActions',{opacity:0,y:24});
+gsap.timeline({scrollTrigger:{trigger:'.cta-section',start:'top 75%'}})
+  .to('#ctaEyebrow',{opacity:1,y:0,duration:0.7,ease:'power3.out'})
+  .to('#ctaTitle',{opacity:1,y:0,duration:1.0,ease:'power3.out'},'-=0.4')
+  .to('#ctaActions',{opacity:1,y:0,duration:0.8,ease:'power3.out'},'-=0.5');
+gsap.to('.cta-blob',{yPercent:-18,ease:'none',scrollTrigger:{trigger:'.cta-section',start:'top bottom',end:'bottom top',scrub:2}});
+</script>
+</body>
+</html>

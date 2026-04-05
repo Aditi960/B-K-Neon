@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — B.K. Neon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+:root{
+  --bg:#0a0a0f;--bg2:#0f0f18;--bg3:#13131e;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);--border-md:rgba(255,255,255,0.14);
+  --pink:#FF2D9B;--pink-glow:rgba(255,45,155,0.28);--pink-glow2:rgba(255,45,155,0.10);
+  --blue:#1E8FFF;--blue-glow:rgba(30,143,255,0.30);--blue-glow2:rgba(30,143,255,0.12);
+  --cyan:#00D4FF;--white:#FFFFFF;--muted:rgba(255,255,255,0.45);
+  --display:'Bebas Neue',sans-serif;--serif:'DM Serif Display',Georgia,serif;--body:'Outfit',sans-serif;
+  --radius:10px;--radius-lg:18px;
+}
+body{background:var(--bg);color:var(--white);font-family:var(--body);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+#cur-dot{position:fixed;z-index:9999;top:0;left:0;width:6px;height:6px;border-radius:50%;background:var(--pink);transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 8px var(--pink);transition:background .3s}
+#cur-ring{position:fixed;z-index:9998;top:0;left:0;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,45,155,.5);transform:translate(-50%,-50%);pointer-events:none;transition:width .3s,height .3s,border-color .3s}
+body.hov #cur-ring{width:48px;height:48px;border-color:var(--blue)}
+body.hov #cur-dot{background:var(--blue);box-shadow:0 0 8px var(--blue)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:background .4s,padding .3s}
+nav.solid{background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 48px}
+.nav-brand{display:flex;flex-direction:column;gap:2px}
+.nav-logo-row{display:flex;align-items:center;gap:10px}
+.nav-pip{width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:pipPulse 2.2s ease-in-out infinite}
+@keyframes pipPulse{0%,100%{box-shadow:0 0 8px var(--pink),0 0 20px rgba(255,45,155,.3)}50%{box-shadow:0 0 16px var(--pink),0 0 40px rgba(255,45,155,.55)}}
+.nav-name{font-family:var(--display);font-size:24px;letter-spacing:0.06em}
+.nav-name span{color:var(--pink)}
+.nav-sub{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.32);padding-left:20px;display:flex;align-items:center;gap:7px}
+.nav-sub::before{content:'';display:block;width:18px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);letter-spacing:0.04em;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-links a.active{position:relative}
+.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--blue);box-shadow:0 0 6px var(--blue);border-radius:2px}
+.nav-cta{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white)!important;border:1.5px solid rgba(255,255,255,0.5);padding:10px 24px;border-radius:40px;transition:border-color .3s,background .3s,box-shadow .3s!important}
+.nav-cta:hover{border-color:var(--pink)!important;box-shadow:0 0 16px rgba(255,45,155,.3);background:rgba(255,45,155,.08)!important}
+
+.section-wrap{max-width:1200px;margin:0 auto;padding:0 52px}
+
+/* Page Header */
+.page-header{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 52px 80px;position:relative;overflow:hidden;gap:60px}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:80px 80px;opacity:0.5;pointer-events:none}
+.hero-glow-a{position:absolute;top:-10%;right:-5%;width:55vw;height:70vh;background:radial-gradient(ellipse,rgba(30,143,255,.09) 0%,transparent 70%);pointer-events:none}
+.hero-glow-b{position:absolute;bottom:10%;left:-5%;width:40vw;height:50vh;background:radial-gradient(ellipse,rgba(255,45,155,.07) 0%,transparent 70%);pointer-events:none}
+.ph-left{position:relative;z-index:2}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.ph-eyebrow .pip{width:28px;height:2px;background:var(--blue);box-shadow:0 0 8px var(--blue)}
+.ph-title{font-family:var(--display);font-size:clamp(72px,9vw,140px);line-height:0.88;letter-spacing:0.01em;color:var(--white);margin-bottom:32px}
+.ph-title .accent{color:transparent;-webkit-text-stroke:2px var(--pink);filter:drop-shadow(0 0 16px rgba(255,45,155,.4))}
+.ph-body{font-size:17px;color:var(--muted);line-height:1.85;max-width:480px;margin-bottom:40px}
+.ph-body em{color:var(--white);font-style:normal}
+.ph-stats{display:flex;gap:40px;flex-wrap:wrap}
+.ph-stat strong{display:block;font-family:var(--display);font-size:40px;color:var(--blue);text-shadow:0 0 20px var(--blue-glow);line-height:1}
+.ph-stat span{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero right — big neon word */
+.ph-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.ph-neon-word{font-family:var(--display);font-size:clamp(100px,14vw,200px);color:transparent;-webkit-text-stroke:2px var(--pink);letter-spacing:0.02em;line-height:1;filter:drop-shadow(0 0 24px rgba(255,45,155,.5)) drop-shadow(0 0 60px rgba(255,45,155,.2));animation:wordPulse 4s ease-in-out infinite;writing-mode:vertical-lr;transform:rotate(180deg)}
+@keyframes wordPulse{0%,100%{filter:drop-shadow(0 0 20px rgba(255,45,155,.4)) drop-shadow(0 0 50px rgba(255,45,155,.15))}50%{filter:drop-shadow(0 0 30px rgba(255,45,155,.6)) drop-shadow(0 0 80px rgba(255,45,155,.25))}}
+
+/* Story section */
+.story-section{padding:100px 0;border-top:1px solid var(--border)}
+.story-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
+.story-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.story-label::before{content:'';width:20px;height:1.5px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.story-heading{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;line-height:1.2;color:var(--white);margin-bottom:0}
+.story-heading em{color:var(--pink);font-style:italic;text-shadow:0 0 20px var(--pink-glow)}
+.story-body p{font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px}
+.story-body p:last-child{margin-bottom:0}
+.story-body strong{color:var(--white);font-weight:500}
+
+/* Values */
+.values-section{padding:100px 0;background:rgba(255,255,255,0.02);border-top:1px solid var(--border)}
+.values-header{margin-bottom:64px}
+.values-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.values-label span{width:20px;height:1.5px;background:var(--muted);display:block}
+.values-title{font-family:var(--display);font-size:clamp(44px,6vw,88px);line-height:0.9;color:var(--white)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.value-card{padding:36px 32px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);transition:border-color .3s,box-shadow .3s;opacity:0;transform:translateY(30px)}
+.value-card:hover{border-color:var(--border-md);box-shadow:0 8px 40px rgba(0,0,0,.25)}
+.value-card.blue:hover{border-color:rgba(30,143,255,.25);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 24px var(--blue-glow2)}
+.value-card.pink:hover{border-color:rgba(255,45,155,.2);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 24px var(--pink-glow2)}
+.value-icon{width:48px;height:48px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:24px}
+.value-card.blue .value-icon{border-color:rgba(30,143,255,.4);color:var(--blue)}
+.value-card.pink .value-icon{border-color:rgba(255,45,155,.4);color:var(--pink)}
+.value-card.cyan .value-icon{border-color:rgba(0,212,255,.4);color:var(--cyan)}
+.value-name{font-family:var(--display);font-size:28px;letter-spacing:0.02em;color:var(--white);margin-bottom:12px}
+.value-desc{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* Timeline */
+.timeline-section{padding:100px 0;border-top:1px solid var(--border)}
+.timeline-header{margin-bottom:64px}
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 10%,var(--border) 90%,transparent)}
+.tl-item{position:relative;padding:0 0 56px 48px;opacity:0;transform:translateX(-20px)}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-40px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--border);box-shadow:0 0 0 4px var(--bg);transition:border-color .3s,box-shadow .3s}
+.tl-item.blue .tl-dot{border-color:var(--blue);box-shadow:0 0 0 4px var(--bg),0 0 12px var(--blue-glow2)}
+.tl-item.pink .tl-dot{border-color:var(--pink);box-shadow:0 0 0 4px var(--bg),0 0 12px var(--pink-glow2)}
+.tl-year{font-family:var(--display);font-size:14px;letter-spacing:0.12em;color:var(--muted);margin-bottom:8px}
+.tl-item.blue .tl-year{color:var(--blue)}
+.tl-item.pink .tl-year{color:var(--pink)}
+.tl-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);color:var(--white);margin-bottom:10px;font-weight:400}
+.tl-desc{font-size:15px;color:var(--muted);line-height:1.7;max-width:560px}
+
+/* Team section */
+.team-section{padding:100px 0;background:rgba(255,255,255,0.02);border-top:1px solid var(--border)}
+.team-header{margin-bottom:64px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.team-card{border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:border-color .3s,box-shadow .3s;opacity:0;transform:translateY(24px)}
+.team-card:hover{border-color:var(--border-md);box-shadow:0 8px 40px rgba(0,0,0,.25)}
+.team-card.blue:hover{border-color:rgba(30,143,255,.2);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 24px var(--blue-glow2)}
+.team-card.pink:hover{border-color:rgba(255,45,155,.18);box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 24px var(--pink-glow2)}
+.team-avatar{width:100%;aspect-ratio:1;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.avatar-inner{font-family:var(--display);font-size:72px;color:transparent;line-height:1}
+.team-card.blue .avatar-inner{-webkit-text-stroke:2px var(--blue);filter:drop-shadow(0 0 16px rgba(30,143,255,.5))}
+.team-card.pink .avatar-inner{-webkit-text-stroke:2px var(--pink);filter:drop-shadow(0 0 16px rgba(255,45,155,.5))}
+.avatar-glow{position:absolute;bottom:-20%;left:50%;transform:translateX(-50%);width:80%;height:60%;border-radius:50%;filter:blur(40px)}
+.team-card.blue .avatar-glow{background:rgba(30,143,255,.15)}
+.team-card.pink .avatar-glow{background:rgba(255,45,155,.12)}
+.team-info{padding:24px 26px}
+.team-name{font-family:var(--display);font-size:28px;letter-spacing:0.02em;color:var(--white);line-height:1;margin-bottom:4px}
+.team-role{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.team-bio{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* CTA */
+.cta-section{padding:130px 0;text-align:center;position:relative;overflow:hidden}
+.cta-blob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vh;background:radial-gradient(ellipse,rgba(30,143,255,.07) 0%,rgba(255,45,155,.04) 55%,transparent 80%);pointer-events:none}
+.cta-eyebrow{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.cta-title{font-family:var(--display);font-size:clamp(52px,8vw,130px);line-height:0.88;letter-spacing:0.01em;color:var(--white);margin-bottom:40px;opacity:0;transform:translateY(40px)}
+.cta-title .neon-word{-webkit-text-stroke:1.5px var(--blue);color:transparent;text-shadow:0 0 30px var(--blue-glow),0 0 60px var(--blue-glow2)}
+.cta-actions{display:flex;align-items:center;justify-content:center;gap:20px;opacity:0;transform:translateY(20px)}
+.btn-neon-lg{font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--blue);color:#fff;padding:18px 44px;border-radius:40px;border:none;cursor:pointer;box-shadow:0 4px 20px var(--blue-glow);transition:background 0.3s,box-shadow 0.3s,transform 0.2s}
+.btn-neon-lg:hover{background:#0A7FEF;box-shadow:0 8px 36px rgba(30,143,255,.4);transform:translateY(-2px)}
+.btn-ghost-lg{font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:transparent;padding:18px 44px;border-radius:40px;border:1.5px solid var(--border-md);cursor:pointer;transition:border-color .3s,color .3s}
+.btn-ghost-lg:hover{border-color:rgba(255,255,255,.35);color:var(--white)}
+
+footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64px 52px 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.footer-logo{font-family:var(--display);font-size:32px;letter-spacing:0.1em;color:var(--white);margin-bottom:12px}
+.footer-logo span{color:var(--blue)}
+.footer-sub{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.7}
+.f-col-title{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px}
+.f-links{list-style:none}.f-links li{margin-bottom:10px}
+.f-links a{font-size:13px;color:rgba(255,255,255,0.45);transition:color 0.3s}
+.f-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.06em}
+
+@media(max-width:960px){
+  nav{padding:16px 24px}nav.solid{padding:12px 24px}.nav-links{display:none}
+  .section-wrap{padding:0 24px}
+  .page-header{grid-template-columns:1fr;min-height:auto;padding:120px 24px 60px;gap:0}
+  .ph-right{display:none}
+  .story-grid{grid-template-columns:1fr;gap:40px}
+  .values-grid{grid-template-columns:1fr;gap:20px}
+  .team-grid{grid-template-columns:1fr 1fr;gap:20px}
+  .cta-actions{flex-direction:column}
+  .footer-top{grid-template-columns:1fr 1fr}footer{padding:48px 24px 24px}
+}
+@media(max-width:480px){.ph-title{font-size:62px}.team-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-logo-row">
+      <div class="nav-pip"></div>
+      <a href="bkneon-dark.html"><span class="nav-name">B.K <span>NEON</span></span></a>
+    </div>
+    <div class="nav-sub">Custom Neon &amp; LED Signage</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="work.html">Work</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="bkneon-dark.html#howItWorks">Process</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="#" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-header">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+
+  <div class="ph-left">
+    <p class="ph-eyebrow" id="phEyebrow"><span class="pip"></span> Our story</p>
+    <h1 class="ph-title" id="phTitle">LIGHT IS<br>OUR <span class="accent">CRAFT.</span></h1>
+    <p class="ph-body" id="phBody">
+      B.K. Neon started in Pune over <em>12 years ago</em> with a single workshop, a roll of neon tube, and a belief that light has the power to transform any space. Today we're one of India's most trusted custom signage studios — still hand-bending every sign in the same spirit we started with.
+    </p>
+    <div class="ph-stats" id="phStats">
+      <div class="ph-stat"><strong>500+</strong><span>Signs made</span></div>
+      <div class="ph-stat"><strong>12+</strong><span>Years active</span></div>
+      <div class="ph-stat"><strong>28+</strong><span>Cities served</span></div>
+    </div>
+  </div>
+
+  <div class="ph-right" id="phRight">
+    <div class="ph-neon-word">NEON</div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="section-wrap">
+    <div class="story-grid">
+      <div>
+        <div class="story-label" id="storyLabel">The beginning</div>
+        <h2 class="story-heading" id="storyHeading">Where it all <em>started.</em></h2>
+      </div>
+      <div class="story-body" id="storyBody">
+        <p>It started in 2012, when Balkrishna Kadam — the "B.K." behind the name — hand-bent his first neon sign for a neighbourhood pharmacy in Shivajinagar. The sign stayed on for <strong>eight years without a repair</strong>. That durability became the foundation of everything we do.</p>
+        <p>What began as a one-man workshop grew into a <strong>full-service signage studio</strong>, adding LED technology without ever abandoning the hand-craft tradition that gives our signs their character. Every tube bend, every wire joint, every backboard cut is done in-house in our Pune workshop.</p>
+        <p>Today, B.K. Neon signs glow in café windows, wedding venues, brand offices, and living rooms from Mumbai to Bangalore to Delhi. But we're still the same studio — just bigger. <strong>Every sign we make is still custom. Still hand-made. Still Pune.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-wrap">
+    <div class="values-header">
+      <div class="values-label"><span></span> What drives us</div>
+      <h2 class="values-title" id="valuesTitle">OUR<br>VALUES</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card blue" id="val0">
+        <div class="value-icon">✦</div>
+        <div class="value-name">Craftsmanship First</div>
+        <div class="value-desc">Every sign is hand-fabricated in our Pune workshop. We don't outsource bends or cuts. The time it takes to do it properly is always worth it.</div>
+      </div>
+      <div class="value-card pink" id="val1">
+        <div class="value-icon">◎</div>
+        <div class="value-name">Honest Pricing</div>
+        <div class="value-desc">No hidden markup, no vague estimates. We quote you a real price based on your real sign — before you commit to anything.</div>
+      </div>
+      <div class="value-card cyan" id="val2">
+        <div class="value-icon">⚡</div>
+        <div class="value-name">Built to Last</div>
+        <div class="value-desc">We use industrial-grade LED drivers and quality neon tube. Our signs are designed to run 50,000+ hours without a fault.</div>
+      </div>
+      <div class="value-card pink" id="val3">
+        <div class="value-icon">◈</div>
+        <div class="value-name">100% Custom</div>
+        <div class="value-desc">We don't sell off-the-shelf signs. Every piece is made fresh for you — your font, your colour, your size, your message.</div>
+      </div>
+      <div class="value-card blue" id="val4">
+        <div class="value-icon">◉</div>
+        <div class="value-name">Fast Turnaround</div>
+        <div class="value-desc">7-day average from approved design to delivery. We know deadlines matter — for events, shop openings, and launches.</div>
+      </div>
+      <div class="value-card cyan" id="val5">
+        <div class="value-icon">✿</div>
+        <div class="value-name">Local Expertise</div>
+        <div class="value-desc">Based in Pune, we understand the Indian climate, power grid, and installation environment. Our signs work in the real conditions here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-wrap">
+    <div class="timeline-header">
+      <div class="values-label"><span></span> Our journey</div>
+      <h2 class="values-title" id="timelineTitle">12 YEARS<br>OF GLOW</h2>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-item blue" id="tl0">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2012</div>
+        <div class="tl-title">The first sign</div>
+        <div class="tl-desc">Balkrishna Kadam hand-bends B.K. Neon's first sign for a pharmacy in Shivajinagar, Pune. One sign, one workshop, one dream.</div>
+      </div>
+      <div class="tl-item pink" id="tl1">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2015</div>
+        <div class="tl-title">Café culture takes off</div>
+        <div class="tl-desc">Koregaon Park's café boom brings B.K. Neon into the city's most photographed interiors. Neon becomes the signature of Pune's new food scene.</div>
+      </div>
+      <div class="tl-item blue" id="tl2">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2017</div>
+        <div class="tl-title">Expanding to LED</div>
+        <div class="tl-desc">We add LED channel lettering and backlit panels to our range — bringing energy efficiency and new design possibilities to commercial clients.</div>
+      </div>
+      <div class="tl-item pink" id="tl3">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2019</div>
+        <div class="tl-title">Wedding neon explodes</div>
+        <div class="tl-desc">B.K. Neon becomes a staple at high-end weddings across Maharashtra and Mumbai. Our script signs are now in hundreds of wedding photographs.</div>
+      </div>
+      <div class="tl-item blue" id="tl4">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2021</div>
+        <div class="tl-title">Pan-India delivery</div>
+        <div class="tl-desc">We begin safely shipping signs to clients across India — from Delhi offices to Bangalore studios to Goa beach bars. The Pune workshop goes national.</div>
+      </div>
+      <div class="tl-item pink" id="tl5">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-title">500 signs and counting</div>
+        <div class="tl-desc">We cross 500 custom signs delivered and launch our new online presence. Still hand-made. Still in Pune. Still lighting up India, one sign at a time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="section-wrap">
+    <div class="team-header">
+      <div class="values-label"><span></span> The people behind the glow</div>
+      <h2 class="values-title" id="teamTitle">MEET<br>THE TEAM</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card blue" id="tm0">
+        <div class="team-avatar">
+          <div class="avatar-inner">BK</div>
+          <div class="avatar-glow"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Balkrishna Kadam</div>
+          <div class="team-role">Founder &amp; Lead Fabricator</div>
+          <div class="team-bio">12 years bending neon and LED. Balkrishna started B.K. Neon from a single workshop in Pune and still personally oversees every custom fabrication.</div>
+        </div>
+      </div>
+      <div class="team-card pink" id="tm1">
+        <div class="team-avatar">
+          <div class="avatar-inner">PR</div>
+          <div class="avatar-glow"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Priya Ranade</div>
+          <div class="team-role">Design &amp; Client Lead</div>
+          <div class="team-bio">Priya turns client ideas into glowing reality — managing every mockup, material choice, and client conversation with a sharp design eye and warm approach.</div>
+        </div>
+      </div>
+      <div class="team-card blue" id="tm2">
+        <div class="team-avatar">
+          <div class="avatar-inner">AM</div>
+          <div class="avatar-glow"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Aditya More</div>
+          <div class="team-role">Installation &amp; Delivery</div>
+          <div class="team-bio">Aditya leads installation for commercial clients across Pune and coordinates pan-India logistics, making sure every sign arrives perfectly and is installed right.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-blob"></div>
+  <div class="section-wrap" style="position:relative;z-index:2">
+    <p class="cta-eyebrow" id="ctaEyebrow">Let's make something together</p>
+    <h2 class="cta-title" id="ctaTitle">YOUR SIGN<br>AWAITS <span class="neon-word">YOU.</span></h2>
+    <div class="cta-actions" id="ctaActions">
+      <button class="btn-neon-lg">Get a Quote on WhatsApp</button>
+      <a href="work.html" class="btn-ghost-lg">See our work</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">B.K.<span> NEON</span></div><p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p></div>
+    <div><div class="f-col-title">Services</div><ul class="f-links"><li><a href="#">Custom Neon Signs</a></li><li><a href="#">LED Sign Boards</a></li><li><a href="#">Shop Signage</a></li><li><a href="#">Wedding Neon</a></li><li><a href="#">Event Decor</a></li></ul></div>
+    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis({ duration: 1.35, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const dot = document.getElementById('cur-dot'), ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; gsap.to(dot,{x:mx,y:my,duration:0.06}); });
+(function lerp(){ rx+=(mx-rx)*0.11; ry+=(my-ry)*0.11; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(lerp); })();
+document.querySelectorAll('a,button').forEach(el => { el.addEventListener('mouseenter',()=>document.body.classList.add('hov')); el.addEventListener('mouseleave',()=>document.body.classList.remove('hov')); });
+
+const nav=document.getElementById('nav'); let lastY=0;
+lenis.on('scroll',({scroll})=>{ nav.classList.toggle('solid',scroll>60); if(scroll>lastY&&scroll>120) gsap.to(nav,{y:-80,duration:0.45,ease:'power2.inOut'}); else gsap.to(nav,{y:0,duration:0.38,ease:'power2.out'}); lastY=scroll; });
+
+/* Hero entrance */
+gsap.set(['#phEyebrow','#phTitle','#phBody','#phStats'],{opacity:0,y:20});
+const heroTl = gsap.timeline({delay:0.1});
+heroTl
+  .to('#phEyebrow',{opacity:1,y:0,duration:0.6,ease:'power3.out'})
+  .to('#phTitle',{opacity:1,y:0,duration:0.9,ease:'power4.out'},0.1)
+  .to('#phBody',{opacity:1,y:0,duration:0.8,ease:'power3.out'},0.45)
+  .to('#phStats',{opacity:1,y:0,duration:0.7,ease:'power3.out'},0.65);
+gsap.from('#phRight',{x:60,opacity:0,duration:1.2,ease:'power3.out',delay:0.4});
+
+/* Glow parallax */
+gsap.to('.hero-glow-a',{yPercent:-20,ease:'none',scrollTrigger:{trigger:'.page-header',start:'top top',end:'bottom top',scrub:2}});
+gsap.to('.hero-glow-b',{yPercent:-14,ease:'none',scrollTrigger:{trigger:'.page-header',start:'top top',end:'bottom top',scrub:2.5}});
+
+/* Story */
+const fu = (id,delay=0) => { gsap.set(id,{opacity:0,y:24}); gsap.to(id,{opacity:1,y:0,duration:0.9,delay,ease:'power3.out',scrollTrigger:{trigger:id,start:'top 82%'}}); };
+fu('#storyLabel',0); fu('#storyHeading',0.1); fu('#storyBody',0.15);
+
+/* Values */
+gsap.set('#valuesTitle',{opacity:0,y:30}); fu('#valuesTitle',0);
+['#val0','#val1','#val2','#val3','#val4','#val5'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,y:0,duration:0.75,ease:'power3.out',delay:(i%3)*0.12,scrollTrigger:{trigger:'.values-grid',start:'top 80%'}});
+});
+
+/* Timeline */
+gsap.set('#timelineTitle',{opacity:0,y:30}); fu('#timelineTitle',0);
+['#tl0','#tl1','#tl2','#tl3','#tl4','#tl5'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,x:0,duration:0.7,ease:'power3.out',delay:i*0.08,scrollTrigger:{trigger:'#timeline',start:'top 80%'}});
+});
+
+/* Team */
+gsap.set('#teamTitle',{opacity:0,y:30}); fu('#teamTitle',0);
+['#tm0','#tm1','#tm2'].forEach((id,i) => {
+  gsap.to(id,{opacity:1,y:0,duration:0.75,ease:'power3.out',delay:i*0.12,scrollTrigger:{trigger:'.team-grid',start:'top 82%'}});
+});
+
+/* CTA */
+gsap.set('#ctaEyebrow',{opacity:0,y:12}); gsap.set('#ctaTitle',{opacity:0,y:40}); gsap.set('#ctaActions',{opacity:0,y:24});
+gsap.timeline({scrollTrigger:{trigger:'.cta-section',start:'top 75%'}})
+  .to('#ctaEyebrow',{opacity:1,y:0,duration:0.7,ease:'power3.out'})
+  .to('#ctaTitle',{opacity:1,y:0,duration:1.0,ease:'power3.out'},'-=0.4')
+  .to('#ctaActions',{opacity:1,y:0,duration:0.8,ease:'power3.out'},'-=0.5');
+gsap.to('.cta-blob',{yPercent:-18,ease:'none',scrollTrigger:{trigger:'.cta-section',start:'top bottom',end:'bottom top',scrub:2}});
+</script>
+</body>
+</html>

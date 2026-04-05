@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.K. Neon — Custom Neon & LED Signage</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+<style>
+/* ── Reset ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+/* ── Tokens ─────────────────────────────── */
+:root {
+  --bg:       #0a0a0f;
+  --bg2:      #0f0f18;
+  --bg3:      #13131e;
+  --surface:  rgba(255,255,255,0.04);
+  --border:   rgba(255,255,255,0.08);
+  --border-md:rgba(255,255,255,0.14);
+
+  --pink:     #FF2D9B;
+  --pink2:    #ff6ec7;
+  --pink-glow: rgba(255,45,155,0.28);
+  --pink-glow2:rgba(255,45,155,0.10);
+  --blue:     #1E8FFF;
+  --blue2:    #5fb3ff;
+  --blue-glow: rgba(30,143,255,0.30);
+  --blue-glow2:rgba(30,143,255,0.12);
+  --cyan:     #00D4FF;
+  --white:    #FFFFFF;
+  --gray:     rgba(255,255,255,0.55);
+  --gray2:    rgba(255,255,255,0.32);
+
+  /* legacy aliases used in new sections */
+  --ink:      #FFFFFF;
+  --ink2:     rgba(255,255,255,0.75);
+  --muted:    rgba(255,255,255,0.45);
+
+  --display:  'Bebas Neue', sans-serif;
+  --serif:    'DM Serif Display', Georgia, serif;
+  --script:   'Dancing Script', cursive;
+  --body:     'Outfit', sans-serif;
+
+  --radius:    10px;
+  --radius-lg: 18px;
+}
+
+/* ── Base ───────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  overflow-x: hidden;
+  cursor: none;
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── Cursor ─────────────────────────────── */
+#cur-dot {
+  position: fixed; z-index: 9999; top: 0; left: 0;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--pink);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--pink);
+  transition: background .3s;
+}
+#cur-ring {
+  position: fixed; z-index: 9998; top: 0; left: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,45,155,.5);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  transition: width .3s, height .3s, border-color .3s;
+}
+body.hov #cur-ring { width: 48px; height: 48px; border-color: var(--blue); }
+body.hov #cur-dot  { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+
+/* ── NAV ────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: transparent;
+  transition: background .4s, padding .3s;
+}
+nav.solid {
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 48px;
+}
+.nav-brand {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nav-logo-row {
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-pip {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 10px var(--pink), 0 0 24px rgba(255,45,155,.4);
+  animation: pipPulse 2.2s ease-in-out infinite;
+}
+@keyframes pipPulse {
+  0%,100%{ box-shadow: 0 0 8px var(--pink), 0 0 20px rgba(255,45,155,.3); }
+  50%    { box-shadow: 0 0 16px var(--pink), 0 0 40px rgba(255,45,155,.55); }
+}
+.nav-name {
+  font-family: var(--display);
+  font-size: 24px; letter-spacing: 0.06em;
+  color: var(--white);
+}
+.nav-name span { color: var(--pink); }
+.nav-sub {
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gray2);
+  padding-left: 20px;
+  display: flex; align-items: center; gap: 7px;
+}
+.nav-sub::before {
+  content: ''; display: block; width: 18px; height: 1px;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+}
+.nav-links {
+  display: flex; align-items: center; gap: 40px; list-style: none;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.65);
+  letter-spacing: 0.04em;
+  transition: color .25s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white) !important;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  padding: 10px 24px; border-radius: 40px;
+  transition: border-color .3s, background .3s, box-shadow .3s !important;
+}
+.nav-cta:hover {
+  border-color: var(--pink) !important;
+  box-shadow: 0 0 16px rgba(255,45,155,.3);
+  background: rgba(255,45,155,.08) !important;
+}
+
+/* ── HERO ───────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+.blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px);
+}
+.blob-1 {
+  width: 55vw; height: 65vh;
+  top: -10%; left: -5%;
+  background: radial-gradient(ellipse, rgba(30,143,255,.11) 0%, transparent 70%);
+}
+.blob-2 {
+  width: 50vw; height: 60vh;
+  top: 10%; right: -5%;
+  background: radial-gradient(ellipse, rgba(255,45,155,.10) 0%, transparent 70%);
+}
+.blob-3 {
+  width: 40vw; height: 40vh;
+  bottom: 0; left: 30%;
+  background: radial-gradient(ellipse, rgba(0,212,255,.07) 0%, transparent 70%);
+}
+
+.hero-left {
+  position: relative; z-index: 2;
+  padding-right: 32px;
+}
+
+.headline {
+  line-height: 1;
+  margin-bottom: 28px;
+}
+.hl-light-up {
+  font-family: var(--display);
+  font-size: clamp(70px, 9.5vw, 138px);
+  color: var(--white);
+  letter-spacing: 0.01em;
+  display: block;
+  overflow: hidden;
+}
+.hl-light-up span { display: block; transform: translateY(110%); }
+
+.hl-your {
+  font-family: var(--script);
+  font-size: clamp(52px, 6.5vw, 90px);
+  color: var(--pink);
+  text-shadow:
+    0 0 16px rgba(255,45,155,.6),
+    0 0 40px rgba(255,45,155,.3),
+    0 0 80px rgba(255,45,155,.15);
+  display: block;
+  overflow: hidden;
+  line-height: 1.1;
+}
+.hl-your span { display: block; transform: translateY(110%); }
+
+.hl-brand {
+  font-family: var(--display);
+  font-size: clamp(82px, 11.5vw, 168px);
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--blue);
+  letter-spacing: 0.01em;
+  display: block;
+  overflow: hidden;
+  text-shadow:
+    0 0 20px rgba(30,143,255,.5),
+    0 0 50px rgba(30,143,255,.25),
+    0 0 90px rgba(30,143,255,.12);
+  filter: drop-shadow(0 0 16px rgba(30,143,255,.4));
+}
+.hl-brand span { display: block; transform: translateY(110%); }
+
+.hero-desc {
+  font-size: 16px; font-weight: 300;
+  color: var(--gray);
+  line-height: 1.75;
+  max-width: 430px;
+  margin-bottom: 32px;
+  opacity: 0;
+}
+
+.hero-stats {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 40px;
+  opacity: 0;
+}
+.stat {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 28px 0 0;
+}
+.stat:not(:first-child) {
+  padding-left: 28px;
+  border-left: 1px solid rgba(255,255,255,0.12);
+}
+.stat-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.stat-icon.blue { border-color: rgba(30,143,255,.4); color: var(--blue); }
+.stat-icon.pink { border-color: rgba(255,45,155,.4); color: var(--pink); }
+.stat-icon.cyan { border-color: rgba(0,212,255,.4);  color: var(--cyan); }
+.stat-text strong {
+  display: block; font-size: 16px; font-weight: 600; color: var(--white); line-height: 1.1;
+}
+.stat-text span {
+  font-size: 11.5px; color: var(--gray2);
+}
+
+.hero-ctas {
+  display: flex; align-items: center; gap: 16px;
+  opacity: 0;
+}
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--pink);
+  color: var(--white);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 16px 32px; border-radius: 40px; border: none; cursor: pointer;
+  box-shadow: 0 0 24px rgba(255,45,155,.4), 0 0 48px rgba(255,45,155,.15);
+  transition: box-shadow .3s, transform .2s, background .3s;
+}
+.btn-wa:hover {
+  background: #ff4daa;
+  box-shadow: 0 0 36px rgba(255,45,155,.6), 0 0 72px rgba(255,45,155,.25);
+  transform: translateY(-2px);
+}
+.btn-wa svg { width: 18px; height: 18px; }
+
+.btn-view {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--white); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 15px 28px; border-radius: 40px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: transparent; cursor: pointer;
+  transition: border-color .3s, background .3s;
+}
+.btn-view:hover {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.04);
+}
+.btn-view svg { width: 14px; height: 14px; transition: transform .3s; }
+.btn-view:hover svg { transform: translateX(4px); }
+
+/* ── Hero right — 3D neon sign ─────────── */
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  height: 100%;
+  min-height: 500px;
+}
+
+.hero-arc {
+  position: absolute;
+  width: 540px; height: 540px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.05);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.hero-arc-2 {
+  width: 420px; height: 420px;
+  border-color: rgba(30,143,255,0.06);
+}
+
+.neon-sign-3d {
+  position: relative;
+  width: 340px; height: 310px;
+  transform: perspective(900px) rotateY(-14deg) rotateX(4deg);
+  animation: signFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(30,143,255,.18)) drop-shadow(0 0 80px rgba(255,45,155,.12));
+}
+@keyframes signFloat {
+  0%,100%{ transform: perspective(900px) rotateY(-14deg) rotateX(4deg) translateY(0px); }
+  50%    { transform: perspective(900px) rotateY(-14deg) rotateX(4deg) translateY(-12px); }
+}
+
+.sign-plate {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg,
+    rgba(25,25,45,0.92) 0%,
+    rgba(15,15,30,0.96) 100%);
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.6),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+.sign-plate::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -40%; width: 60%; height: 100%;
+  background: linear-gradient(105deg,
+    transparent 40%,
+    rgba(255,255,255,0.04) 50%,
+    transparent 60%);
+  pointer-events: none;
+}
+
+.sign-frame {
+  position: absolute;
+  inset: 14px;
+  border-radius: 16px;
+  border: 2.5px solid transparent;
+  background: transparent;
+  box-shadow:
+    0 0 0 2px rgba(255,45,155,0.0),
+    inset 0 0 0 2px rgba(255,45,155,0.0);
+}
+.sign-frame::before {
+  content: '';
+  position: absolute; inset: -2.5px;
+  border-radius: 18px;
+  padding: 2.5px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--blue) 50%, var(--pink) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: framePulse 3s ease-in-out infinite;
+  box-shadow:
+    0 0 12px var(--pink),
+    0 0 30px rgba(255,45,155,.4),
+    inset 0 0 12px var(--pink);
+}
+@keyframes framePulse {
+  0%,100%{ opacity: 0.9; }
+  50%    { opacity: 1; filter: brightness(1.2); }
+}
+
+.screw {
+  position: absolute;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #1a1a1a);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.screw.tl { top: 22px; left: 22px; }
+.screw.tr { top: 22px; right: 22px; }
+.screw.bl { bottom: 22px; left: 22px; }
+.screw.br { bottom: 22px; right: 22px; }
+
+.sign-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2px;
+}
+.sign-bk {
+  font-family: var(--display);
+  font-size: 82px;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--pink);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: none;
+  filter:
+    drop-shadow(0 0 8px var(--pink))
+    drop-shadow(0 0 20px rgba(255,45,155,.5))
+    drop-shadow(0 0 45px rgba(255,45,155,.25));
+  animation: neonFlicker 6s ease-in-out infinite;
+}
+.sign-neon {
+  font-family: var(--display);
+  font-size: 82px;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--cyan);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  filter:
+    drop-shadow(0 0 8px var(--cyan))
+    drop-shadow(0 0 20px rgba(0,212,255,.5))
+    drop-shadow(0 0 45px rgba(0,212,255,.25));
+  animation: neonFlicker 6s ease-in-out infinite .4s;
+}
+@keyframes neonFlicker {
+  0%,19%,21%,23%,25%,54%,56%,100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 8px currentColor)
+      drop-shadow(0 0 22px rgba(255,255,255,.15))
+      drop-shadow(0 0 46px rgba(255,255,255,.08));
+  }
+  20%,22%,24%,55% {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+}
+
+.sign-floor-glow {
+  position: absolute;
+  bottom: -40px; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 60px;
+  background: radial-gradient(ellipse,
+    rgba(30,143,255,.22) 0%,
+    rgba(255,45,155,.12) 50%,
+    transparent 75%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.plant-hint {
+  position: absolute;
+  bottom: 0; right: -20px;
+  width: 200px; height: 320px;
+  background: linear-gradient(to top,
+    rgba(60,20,40,.45) 0%,
+    transparent 100%);
+  clip-path: polygon(40% 100%, 50% 40%, 55% 60%, 60% 20%, 70% 50%, 75% 0%, 85% 30%, 90% 10%, 100% 0%, 100% 100%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── MARQUEE BAR ────────────────────────── */
+.marquee-bar {
+  background: var(--bg3);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 0;
+  overflow: hidden; white-space: nowrap;
+}
+.mq-track {
+  display: inline-flex;
+  animation: mq 30s linear infinite;
+}
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mq-i {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); padding: 0 32px;
+  transition: color .3s;
+}
+.mq-dot {
+  display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+  vertical-align: middle; margin: 0 4px;
+}
+.mq-dot.p { background: var(--pink); box-shadow: 0 0 6px var(--pink); }
+.mq-dot.b { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+
+/* ── SECTION BASE ───────────────────────── */
+.section-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+
+/* ── ABOUT STRIP ────────────────────────── */
+.about-strip {
+  padding: 100px 0 80px;
+  border-top: 1px solid var(--border);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 72px;
+  align-items: start;
+}
+.about-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  padding-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.about-label::before {
+  content: '';
+  display: block;
+  width: 20px; height: 1.5px;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+}
+.about-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.about-title em {
+  color: var(--pink);
+  font-style: italic;
+  text-shadow: 0 0 20px var(--pink-glow);
+}
+.about-body {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 560px;
+}
+
+/* ── PRODUCTS SECTION ───────────────────── */
+.products-section {
+  padding: 80px 0 120px;
+}
+.products-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+}
+.sec-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-label span {
+  width: 20px; height: 1.5px;
+  background: var(--muted);
+  display: block;
+}
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(44px, 6vw, 88px);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+.sec-link {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.3s, gap 0.3s;
+}
+.sec-link::after {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: currentColor;
+  transition: width 0.35s;
+}
+.sec-link:hover { color: var(--blue); gap: 16px; }
+.sec-link:hover::after { width: 48px; }
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.product-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+  opacity: 0;
+  transform: translateY(40px);
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0,0,0,.3), 0 0 0 1px var(--border-md);
+}
+.product-card.blue:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,.25), 0 0 30px var(--blue-glow), 0 0 0 1px rgba(30,143,255,0.25);
+}
+.product-card.pink:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,.25), 0 0 30px var(--pink-glow), 0 0 0 1px rgba(255,45,155,0.2);
+}
+.card-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.card-neon-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; height: 100%;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.product-card:hover .card-neon-preview { transform: scale(1.05); }
+.neon-sign-svg {
+  width: 80%;
+  max-width: 280px;
+  filter: drop-shadow(0 0 8px currentColor);
+  transition: filter 0.4s;
+}
+.product-card:hover .neon-sign-svg {
+  filter: drop-shadow(0 0 18px currentColor) drop-shadow(0 0 40px currentColor);
+}
+.card-body {
+  padding: 22px 24px 24px;
+  border-top: 1px solid var(--border);
+}
+.card-tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.card-name {
+  font-family: var(--display);
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.card-footer {
+  padding: 0 24px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-price {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+.card-btn {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-md);
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.product-card.blue .card-btn:hover {
+  background: var(--blue); border-color: var(--blue);
+  color: #fff; box-shadow: 0 0 20px var(--blue-glow);
+}
+.product-card.pink .card-btn:hover {
+  background: var(--pink); border-color: var(--pink);
+  color: #fff; box-shadow: 0 0 20px var(--pink-glow);
+}
+.product-card.featured {
+  grid-column: span 2;
+}
+.product-card.featured .card-img-wrap {
+  aspect-ratio: 16/7;
+}
+
+/* ── STATS STRIP ────────────────────────── */
+.stats-strip {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 0 40px;
+  border-right: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(24px);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--display);
+  font-size: 62px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.stat-num.blue { color: var(--blue); text-shadow: 0 0 24px var(--blue-glow); }
+.stat-num.pink { color: var(--pink); text-shadow: 0 0 24px var(--pink-glow); }
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── HOW IT WORKS ───────────────────────── */
+.hiw-section {
+  padding: 120px 0;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--border);
+}
+.hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+}
+.hiw-step {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.hiw-num {
+  font-family: var(--display);
+  font-size: 56px;
+  color: var(--blue-glow);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.hiw-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.hiw-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── CTA SECTION ────────────────────────── */
+.cta-section {
+  padding: 130px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-blob {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw; height: 60vh;
+  background: radial-gradient(ellipse,
+    rgba(30,143,255,.08) 0%,
+    rgba(255,45,155,.04) 50%,
+    transparent 75%);
+  pointer-events: none;
+}
+.cta-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.cta-title {
+  font-family: var(--display);
+  font-size: clamp(56px, 9vw, 140px);
+  line-height: 0.88;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+.cta-title .neon-word {
+  -webkit-text-stroke: 1.5px var(--pink);
+  color: transparent;
+  text-shadow: 0 0 30px var(--pink-glow), 0 0 60px var(--pink-glow2);
+}
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.btn-neon-lg {
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--blue); color: #fff;
+  padding: 18px 44px;
+  border-radius: 40px; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px var(--blue-glow);
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.btn-neon-lg:hover {
+  background: #0A7FEF;
+  box-shadow: 0 8px 36px rgba(30,143,255,.4);
+  transform: translateY(-2px);
+}
+
+/* ── FOOTER ─────────────────────────────── */
+footer {
+  background: rgba(0,0,0,0.4);
+  border-top: 1px solid var(--border);
+  padding: 64px 52px 28px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.footer-logo {
+  font-family: var(--display);
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.footer-logo span { color: var(--blue); }
+.footer-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.7;
+}
+.f-col-title {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+}
+.f-links { list-style: none; }
+.f-links li { margin-bottom: 10px; }
+.f-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.3s;
+}
+.f-links a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.06em;
+}
+
+/* ── WILL FADE HELPER ───────────────────── */
+.will-fade { opacity: 0; }
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  nav.solid { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 90px 24px 48px; gap: 0; }
+  .hero-right { display: none; }
+  .hl-light-up { font-size: clamp(58px, 14vw, 100px); }
+  .hl-brand    { font-size: clamp(68px, 18vw, 120px); }
+  .hl-your     { font-size: clamp(42px, 11vw, 72px); }
+  .hero-stats  { flex-wrap: wrap; gap: 20px; }
+  .stat:not(:first-child) { border-left: none; padding-left: 0; }
+  .section-wrap { padding: 0 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .product-grid { grid-template-columns: 1fr; }
+  .hiw-grid { grid-template-columns: 1fr; gap: 48px; }
+  .product-card.featured { grid-column: span 1; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .stat-item { border-right: none; padding: 0; }
+  .cta-actions { flex-direction: column; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 48px 24px 24px; }
+}
+@media (max-width: 480px) {
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .btn-wa, .btn-view { width: 100%; justify-content: center; }
+  .stats-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- ───── NAV ───────────────────────────── -->
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-logo-row">
+      <div class="nav-pip"></div>
+      <span class="nav-name">B.K <span>NEON</span></span>
+    </div>
+    <div class="nav-sub">Custom Neon &amp; LED Signage</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="work.html">Work</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#howItWorks">Process</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- ───── HERO ───────────────────────────── -->
+<section class="hero">
+
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- LEFT COPY -->
+  <div class="hero-left">
+    <div class="headline">
+      <span class="hl-light-up"><span id="hl1">LIGHT UP</span></span>
+      <span class="hl-your"><span id="hl2">your</span></span>
+      <span class="hl-brand"><span id="hl3">BRAND</span></span>
+    </div>
+
+    <p class="hero-desc" id="heroDesc">
+      Custom neon &amp; LED signs for shops, cafés, events<br>
+      and brands that want to stand out.
+    </p>
+
+    <!-- Mini stats -->
+    <div class="hero-stats" id="heroStats">
+      <div class="stat">
+        <div class="stat-icon blue">⚡</div>
+        <div class="stat-text">
+          <strong>500+</strong>
+          <span>Signs Installed</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon pink">⏱</div>
+        <div class="stat-text">
+          <strong>7-Day</strong>
+          <span>Delivery</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon cyan">📍</div>
+        <div class="stat-text">
+          <strong>Pune-Based</strong>
+          <span>Delivered Across India</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="hero-ctas" id="heroCtas">
+      <button class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        GET QUOTE ON WHATSAPP
+      </button>
+      <button class="btn-view">
+        VIEW OUR WORK
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT: 3D Neon Sign -->
+  <div class="hero-right" id="heroRight">
+    <div class="hero-arc"></div>
+    <div class="hero-arc hero-arc-2"></div>
+
+    <div class="neon-sign-3d" id="neonSign">
+      <div class="sign-plate"></div>
+      <div class="sign-frame"></div>
+
+      <div class="screw tl"></div>
+      <div class="screw tr"></div>
+      <div class="screw bl"></div>
+      <div class="screw br"></div>
+
+      <div class="sign-content">
+        <div class="sign-bk">B.K.</div>
+        <div class="sign-neon">NEON</div>
+      </div>
+    </div>
+
+    <div class="sign-floor-glow"></div>
+    <div class="plant-hint"></div>
+  </div>
+</section>
+
+<!-- ───── MARQUEE ────────────────────────── -->
+<div class="marquee-bar">
+  <div class="mq-track">
+    <span class="mq-i">Sign Boards</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Shop Signage</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">Wedding Neon</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Café Signs</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">Event Decor</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Custom Neon Signs</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">LED Channel Letters</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Interior Branding</span>
+    <span class="mq-dot b"></span>
+    <!-- duplicate for seamless loop -->
+    <span class="mq-i">Sign Boards</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Shop Signage</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">Wedding Neon</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Café Signs</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">Event Decor</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Custom Neon Signs</span>
+    <span class="mq-dot b"></span>
+    <span class="mq-i">LED Channel Letters</span>
+    <span class="mq-dot p"></span>
+    <span class="mq-i">Interior Branding</span>
+    <span class="mq-dot b"></span>
+  </div>
+</div>
+
+<!-- ───── ABOUT STRIP ────────────────────── -->
+<div class="about-strip">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <p class="about-label will-fade" id="aboutLabel">Our craft</p>
+      <div>
+        <h2 class="about-title will-fade" id="aboutTitle">
+          Where light becomes <em>language.</em>
+        </h2>
+        <p class="about-body will-fade" id="aboutBody">
+          B.K. Neon has been designing and fabricating custom signage in Pune for over a decade. We combine
+          traditional craftsmanship with modern LED technology to create signs that glow, captivate, and endure. Every
+          piece is tailored to your brand, guaranteeing unmatched durability, premium design, and local expertise you
+          can trust.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── PRODUCTS ───────────────────────── -->
+<section class="products-section">
+  <div class="section-wrap">
+    <div class="products-header">
+      <div class="products-title-block">
+        <div class="sec-label"><span></span> Our work</div>
+        <h2 class="sec-title will-fade" id="secTitle">WHAT WE<br>CREATE</h2>
+      </div>
+      <a href="work.html" class="sec-link will-fade" id="secLink">View all projects</a>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- Card 1 — Featured/wide -->
+      <div class="product-card featured blue" id="card0">
+        <div class="card-img-wrap">
+          <div class="card-neon-preview">
+            <svg class="neon-sign-svg" viewBox="0 0 280 60" fill="none" color="#1E8FFF">
+              <text x="140" y="48" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52"
+                fill="none" stroke="#1E8FFF" stroke-width="1.5" opacity="0.9">CAFÉ MOCHA</text>
+              <text x="140" y="48" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="52"
+                fill="none" stroke="#1E8FFF" stroke-width="0.5" opacity="0.35">CAFÉ MOCHA</text>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Commercial · Cafés</div>
+          <div class="card-name">Custom Brand Sign</div>
+          <div class="card-desc">Full neon storefront signage — designed from your logo, mounted on acrylic backboard.</div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">From ₹4,500</span>
+          <button class="card-btn">Get Similar Quote</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card pink" id="card1">
+        <div class="card-img-wrap">
+          <div class="card-neon-preview">
+            <svg class="neon-sign-svg" viewBox="0 0 200 60" fill="none" color="#FF2D9B">
+              <text x="100" y="46" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="40"
+                fill="none" stroke="#FF2D9B" stroke-width="1.2" font-style="italic" opacity="0.9">Forever</text>
+              <text x="100" y="46" text-anchor="middle" font-family="'DM Serif Display', serif" font-size="40"
+                fill="none" stroke="#FF2D9B" stroke-width="0.4" font-style="italic" opacity="0.35">Forever</text>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Events · Weddings</div>
+          <div class="card-name">Script Neon</div>
+          <div class="card-desc">Elegant script lettering perfect for weddings, anniversaries, and photo backdrops.</div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">From ₹3,200</span>
+          <button class="card-btn">Get Similar Quote</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card blue" id="card2">
+        <div class="card-img-wrap">
+          <div class="card-neon-preview">
+            <svg class="neon-sign-svg" viewBox="0 0 200 80" fill="none" color="#1E8FFF">
+              <rect x="10" y="5" width="180" height="70" rx="12" fill="none" stroke="#1E8FFF" stroke-width="1.5" opacity="0.7"/>
+              <text x="100" y="52" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="34"
+                fill="none" stroke="#1E8FFF" stroke-width="1.2" opacity="0.9">OPEN 24/7</text>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Retail · Shops</div>
+          <div class="card-name">LED Sign Board</div>
+          <div class="card-desc">Bright, energy-efficient LED boards for shops — visible day and night, rain-proof.</div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">From ₹2,800</span>
+          <button class="card-btn">Get Similar Quote</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="product-card blue" id="card3">
+        <div class="card-img-wrap">
+          <div class="card-neon-preview">
+            <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#1E8FFF">
+              <polygon points="100,10 120,40 155,45 130,68 136,100 100,82 64,100 70,68 45,45 80,40"
+                fill="none" stroke="#1E8FFF" stroke-width="1.8" opacity="0.85"/>
+              <polygon points="100,10 120,40 155,45 130,68 136,100 100,82 64,100 70,68 45,45 80,40"
+                fill="none" stroke="#1E8FFF" stroke-width="0.5" opacity="0.35"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Custom · Logo</div>
+          <div class="card-name">Logo Neon</div>
+          <div class="card-desc">Your exact logo recreated as a glowing neon piece — perfect for office or retail branding.</div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">From ₹5,500</span>
+          <button class="card-btn">Get Similar Quote</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="product-card pink" id="card4">
+        <div class="card-img-wrap">
+          <div class="card-neon-preview">
+            <svg class="neon-sign-svg" viewBox="0 0 200 100" fill="none" color="#FF2D9B">
+              <path d="M100 80 C60 55, 20 40, 20 22 C20 8 32 0 46 0 C58 0 70 8 100 30 C130 8 142 0 154 0 C168 0 180 8 180 22 C180 40 140 55 100 80Z"
+                fill="none" stroke="#FF2D9B" stroke-width="2" opacity="0.9"/>
+              <path d="M100 80 C60 55, 20 40, 20 22 C20 8 32 0 46 0 C58 0 70 8 100 30 C130 8 142 0 154 0 C168 0 180 8 180 22 C180 40 140 55 100 80Z"
+                fill="none" stroke="#FF2D9B" stroke-width="0.5" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Decor · Gifting</div>
+          <div class="card-name">Symbol &amp; Shape</div>
+          <div class="card-desc">Custom shapes, hearts, arrows — gift-ready neon signs that come boxed with hanging kit.</div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">From ₹2,600</span>
+          <button class="card-btn">Get Similar Quote</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───── STATS STRIP ────────────────────── -->
+<div class="stats-strip">
+  <div class="section-wrap">
+    <div class="stats-grid">
+      <div class="stat-item" id="stat0">
+        <div class="stat-num blue">500+</div>
+        <div class="stat-label">Signs installed<br>across Pune &amp; India</div>
+      </div>
+      <div class="stat-item" id="stat1">
+        <div class="stat-num pink">12+</div>
+        <div class="stat-label">Years crafting<br>neon &amp; LED</div>
+      </div>
+      <div class="stat-item" id="stat2">
+        <div class="stat-num blue">7 day</div>
+        <div class="stat-label">Average turnaround<br>from design to delivery</div>
+      </div>
+      <div class="stat-item" id="stat3">
+        <div class="stat-num pink">100%</div>
+        <div class="stat-label">Custom made —<br>no off-the-shelf</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── HOW IT WORKS ───────────────────── -->
+<section class="hiw-section" id="howItWorks">
+  <div class="section-wrap">
+    <div class="sec-label"><span></span> Simple Process</div>
+    <h2 class="sec-title will-fade" id="hiwTitle">HOW IT<br>WORKS</h2>
+
+    <div class="hiw-grid" id="hiwGrid">
+      <div class="hiw-step" id="hiwStep0">
+        <div class="hiw-num">01</div>
+        <div class="hiw-title">Share your idea</div>
+        <div class="hiw-desc">Send us your logo, text, or reference image on WhatsApp. We'll discuss sizing and colors.</div>
+      </div>
+      <div class="hiw-step" id="hiwStep1">
+        <div class="hiw-num">02</div>
+        <div class="hiw-title">Get design preview</div>
+        <div class="hiw-desc">We'll create a digital mockup of your sign for approval, along with a final quote.</div>
+      </div>
+      <div class="hiw-step" id="hiwStep2">
+        <div class="hiw-num">03</div>
+        <div class="hiw-title">We build &amp; deliver</div>
+        <div class="hiw-desc">Your sign is handcrafted in our Pune studio and safely delivered anywhere in India.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CTA ────────────────────────────── -->
+<section class="cta-section">
+  <div class="cta-blob"></div>
+  <div class="section-wrap" style="position:relative;z-index:2">
+    <p class="cta-eyebrow will-fade" id="ctaEyebrow">Start your project</p>
+    <h2 class="cta-title" id="ctaTitle">
+      MAKE YOUR<br>SIGN <span class="neon-word">GLOW.</span>
+    </h2>
+    <div class="cta-actions" id="ctaActions">
+      <button class="btn-neon-lg">Chat on WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ─────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">B.K.<span> NEON</span></div>
+      <p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p>
+    </div>
+    <div>
+      <div class="f-col-title">Services</div>
+      <ul class="f-links">
+        <li><a href="#">Custom Neon Signs</a></li>
+        <li><a href="#">LED Sign Boards</a></li>
+        <li><a href="#">Shop Signage</a></li>
+        <li><a href="#">Wedding Neon</a></li>
+        <li><a href="#">Event Decor</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Contact</div>
+      <ul class="f-links">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">hello@bkneon.in</a></li>
+        <li><a href="#">Pune, MH</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 B.K. Neon — All rights reserved</span>
+    <span>Handcrafted in Pune</span>
+  </div>
+</footer>
+
+<!-- ───── SCRIPTS ────────────────────────── -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Lenis smooth scroll ───────────────────── */
+const lenis = new Lenis({
+  duration: 1.35,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothTouch: false,
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+
+/* ── Custom cursor ─────────────────────────── */
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  gsap.to(dot, { x: mx, y: my, duration: 0.06 });
+});
+(function lerp() {
+  rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(lerp);
+})();
+document.querySelectorAll('a,button,.product-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+/* ── Nav scroll behaviour ──────────────────── */
+const nav = document.getElementById('nav');
+lenis.on('scroll', ({ scroll }) => {
+  nav.classList.toggle('solid', scroll > 60);
+});
+
+/* ── Hero entrance ─────────────────────────── */
+gsap.set(['#heroDesc', '#heroStats', '#heroCtas'], { opacity: 0, y: 22 });
+
+const heroTl = gsap.timeline({ delay: 0.15 });
+heroTl
+  .to(['#hl1', '#hl2', '#hl3'], {
+    y: 0,
+    stagger: 0.12,
+    duration: 1.0,
+    ease: 'power4.out'
+  })
+  .to('#heroDesc',  { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.55)
+  .to('#heroStats', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.70)
+  .to('#heroCtas',  { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.85);
+
+/* Sign slides in from right */
+gsap.from('#neonSign', {
+  x: 80, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.4
+});
+
+/* ── Nav hide on scroll down ───────────────── */
+let lastY = 0;
+lenis.on('scroll', ({ scroll }) => {
+  if (scroll > lastY && scroll > 120) {
+    gsap.to(nav, { y: -80, duration: 0.45, ease: 'power2.inOut' });
+  } else {
+    gsap.to(nav, { y: 0, duration: 0.38, ease: 'power2.out' });
+  }
+  lastY = scroll;
+});
+
+/* ── Blob parallax ─────────────────────────── */
+gsap.to('.blob-1', {
+  yPercent: -20, ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 }
+});
+gsap.to('.blob-2', {
+  yPercent: -14, ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2.5 }
+});
+gsap.to('#heroRight', {
+  yPercent: -8, ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.8 }
+});
+
+/* ── About strip ───────────────────────────── */
+const fadeUp = (id, delay = 0) => gsap.to(id, {
+  opacity: 1, y: 0, duration: 0.9,
+  delay,
+  ease: 'power3.out',
+  scrollTrigger: { trigger: id, start: 'top 82%' }
+});
+gsap.set('#aboutLabel', { opacity: 0, y: 20 });
+gsap.set('#aboutTitle', { opacity: 0, y: 30 });
+gsap.set('#aboutBody',  { opacity: 0, y: 20 });
+fadeUp('#aboutLabel', 0);
+fadeUp('#aboutTitle', 0.1);
+fadeUp('#aboutBody',  0.2);
+
+/* ── Sec title & link ──────────────────────── */
+gsap.set('#secTitle', { opacity: 0, y: 30 });
+gsap.set('#secLink',  { opacity: 0, y: 10 });
+fadeUp('#secTitle', 0);
+fadeUp('#secLink',  0.15);
+
+/* ── Product cards stagger ─────────────────── */
+['#card0', '#card1', '#card2', '#card3', '#card4'].forEach((id, i) => {
+  gsap.to(id, {
+    opacity: 1, y: 0,
+    duration: 0.75,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#productGrid',
+      start: 'top 78%',
+    },
+    delay: i * 0.1
+  });
+});
+
+/* ── Stats stagger ─────────────────────────── */
+['#stat0', '#stat1', '#stat2', '#stat3'].forEach((id, i) => {
+  gsap.to(id, {
+    opacity: 1, y: 0, duration: 0.8,
+    ease: 'power3.out',
+    delay: i * 0.12,
+    scrollTrigger: { trigger: '.stats-strip', start: 'top 80%' }
+  });
+});
+
+/* ── HIW stagger ─────────────────────────── */
+gsap.set('#hiwTitle', { opacity: 0, y: 30 });
+fadeUp('#hiwTitle', 0);
+['#hiwStep0', '#hiwStep1', '#hiwStep2'].forEach((id, i) => {
+  gsap.to(id, {
+    opacity: 1, y: 0, duration: 0.8,
+    ease: 'power3.out',
+    delay: i * 0.15,
+    scrollTrigger: { trigger: '#hiwGrid', start: 'top 80%' }
+  });
+});
+
+/* ── CTA ───────────────────────────────────── */
+gsap.set('#ctaEyebrow', { opacity: 0, y: 12 });
+gsap.set('#ctaTitle',   { opacity: 0, y: 40 });
+gsap.set('#ctaActions', { opacity: 0, y: 24 });
+
+const ctaTl = gsap.timeline({
+  scrollTrigger: { trigger: '.cta-section', start: 'top 75%' }
+});
+ctaTl
+  .to('#ctaEyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+  .to('#ctaTitle',   { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, '-=0.4')
+  .to('#ctaActions', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5');
+
+/* ── CTA blob parallax ─────────────────────── */
+gsap.to('.cta-blob', {
+  yPercent: -18,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.cta-section',
+    start: 'top bottom', end: 'bottom top',
+    scrub: 2
+  }
+});
+</script>
+</body>
+</html>
