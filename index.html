@@ -37,13 +37,13 @@ html { scroll-behavior: auto; }
   --blue-glow2:rgba(30,143,255,0.12);
   --cyan:     #00D4FF;
   --white:    #FFFFFF;
-  --gray:     rgba(255,255,255,0.55);
-  --gray2:    rgba(255,255,255,0.32);
+  --gray:     rgba(255,255,255,0.8);
+  --gray2:    rgba(255,255,255,0.8);
 
   /* legacy aliases used in new sections */
   --ink:      #FFFFFF;
-  --ink2:     rgba(255,255,255,0.75);
-  --muted:    rgba(255,255,255,0.45);
+  --ink2:     rgba(255,255,255,0.8);
+  --muted:    rgba(255,255,255,0.8);
 
   --display:  'Bebas Neue', sans-serif;
   --serif:    'DM Serif Display', Georgia, serif;
@@ -137,7 +137,7 @@ nav.solid {
   display: flex; align-items: center; gap: 40px; list-style: none;
 }
 .nav-links a {
-  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.65);
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.8);
   letter-spacing: 0.04em;
   transition: color .25s;
 }
@@ -498,7 +498,7 @@ nav.solid {
 @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 .mq-i {
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); padding: 0 32px;
+  color: rgba(255,255,255,0.8); padding: 0 32px;
   transition: color .3s;
 }
 .mq-dot {
@@ -718,11 +718,11 @@ nav.solid {
 }
 .product-card.blue .card-btn:hover {
   background: var(--blue); border-color: var(--blue);
-  color: #fff; box-shadow: 0 0 20px var(--blue-glow);
+  color: #ffffff; box-shadow: 0 0 20px var(--blue-glow);
 }
 .product-card.pink .card-btn:hover {
   background: var(--pink); border-color: var(--pink);
-  color: #fff; box-shadow: 0 0 20px var(--pink-glow);
+  color: #ffffff; box-shadow: 0 0 20px var(--pink-glow);
 }
 .product-card.featured {
   grid-column: span 2;
@@ -851,7 +851,7 @@ nav.solid {
 .btn-neon-lg {
   font-size: 13px; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  background: var(--blue); color: #fff;
+  background: var(--blue); color: #ffffff;
   padding: 18px 44px;
   border-radius: 40px; border: none; cursor: pointer;
   box-shadow: 0 4px 20px var(--blue-glow);
@@ -887,21 +887,21 @@ footer {
 .footer-logo span { color: var(--blue); }
 .footer-sub {
   font-size: 13px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.8);
   line-height: 1.7;
 }
 .f-col-title {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
   margin-bottom: 16px;
 }
 .f-links { list-style: none; }
 .f-links li { margin-bottom: 10px; }
 .f-links a {
   font-size: 13px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.8);
   transition: color 0.3s;
 }
 .f-links a:hover { color: var(--white); }
@@ -910,7 +910,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
   letter-spacing: 0.06em;
 }
 
