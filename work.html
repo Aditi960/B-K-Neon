@@ -153,7 +153,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64p
     <li><a href="products.html">Products</a></li>
     <li><a href="process.html">Process</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="#" class="nav-cta">Get a Quote</a></li>
+    <li><a href="#" class="nav-cta whatsapp-link" data-msg="Hi! I'd like to get a quote for a custom neon sign.">Get a Quote</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -165,7 +165,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64p
   <a href="products.html">Products</a>
   <a href="process.html">Process</a>
   <a href="about.html">About</a>
-  <a href="#" class="m-cta">Get a Quote</a>
+  <a href="#" class="m-cta whatsapp-link" data-msg="Hi! I'd like to get a quote for a custom neon sign.">Get a Quote</a>
 </div>
 
 <section class="page-header">
@@ -232,7 +232,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64p
 <section class="portfolio-cta">
   <div class="section-wrap">
     <p class="portfolio-cta-text" id="portfolioCta">Want something <em>just like this?</em><br>Send us your idea and we'll make it glow.</p>
-    <button class="btn-neon">Get Quote on WhatsApp</button>
+    <button class="btn-neon whatsapp-link" data-msg="Hi! I'd like to get a quote for a custom neon sign. I saw your work portfolio!">Get Quote on WhatsApp</button>
   </div>
 </section>
 
@@ -240,7 +240,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border);padding:64p
   <div class="footer-top">
     <div><div class="footer-logo">B.K.<span> NEON</span></div><p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p></div>
     <div><div class="f-col-title">Services</div><ul class="f-links"><li><a href="#">Custom Neon Signs</a></li><li><a href="#">LED Sign Boards</a></li><li><a href="#">Shop Signage</a></li><li><a href="#">Wedding Neon</a></li><li><a href="#">Event Decor</a></li></ul></div>
-    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
+    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="#" class="whatsapp-link" data-msg="Hi! I'd like to get in touch with B.K. Neon.">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
   </div>
   <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
 </footer>
@@ -270,5 +270,6 @@ const hamburger=document.getElementById('navHamburger'),mobileMenu=document.getE
 hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':''});
 mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''}));
 </script>
+<script src="assets/js/whatsapp.js"></script>
 </body>
 </html>
