@@ -1,0 +1,36 @@
+.page-header{padding:160px 0 80px;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:80px 80px;opacity:0.4;pointer-events:none}
+.page-header::after{content:'';position:absolute;top:0;right:-10%;width:50vw;height:80%;background:radial-gradient(ellipse,rgba(30,143,255,.08) 0%,transparent 70%);pointer-events:none}
+.page-header-inner{position:relative;z-index:2}
+.page-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.page-eyebrow .pip{width:28px;height:2px;background:var(--blue);box-shadow:0 0 8px var(--blue)}
+.page-title{font-family:var(--display);font-size:clamp(64px,10vw,140px);line-height:0.88;letter-spacing:0.01em;color:var(--white)}
+.page-title .accent{color:transparent;-webkit-text-stroke:2px var(--blue);filter:drop-shadow(0 0 16px rgba(30,143,255,.4))}
+.page-subtitle{max-width:480px;font-size:16px;color:var(--muted);line-height:1.8;margin-top:28px}
+
+.portfolio-filters{display:flex;align-items:center;gap:8px;padding:0 0 48px;flex-wrap:wrap}
+.filter-btn{font-family:var(--body);font-size:13px;font-weight:400;letter-spacing:0.06em;color:var(--muted);background:transparent;border:1px solid var(--border-md);padding:10px 24px;border-radius:40px;cursor:pointer;transition:all 0.3s}
+.filter-btn:hover{color:var(--white);border-color:rgba(255,255,255,0.3)}
+.filter-btn.active{color:#fff;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.25)}
+.filter-btn.active:hover{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 16px var(--blue-glow)}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-bottom:120px}
+.gallery-item{border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);border:1px solid var(--border);cursor:pointer;position:relative;opacity:0;transform:translateY(30px);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s}
+.gallery-item.tall{grid-row:span 2}
+.gallery-item:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px var(--border-md)}
+.gallery-item.blue:hover{box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 28px var(--blue-glow),0 0 0 1px rgba(30,143,255,0.2)}
+.gallery-item.pink:hover{box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 28px var(--pink-glow),0 0 0 1px rgba(255,45,155,0.18)}
+.gallery-img{width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.gallery-item.tall .gallery-img{aspect-ratio:3/5}
+.gallery-svg{width:70%;max-width:240px;filter:drop-shadow(0 0 10px currentColor);transition:filter 0.4s,transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)}
+.gallery-item:hover .gallery-svg{filter:drop-shadow(0 0 16px currentColor) drop-shadow(0 0 36px currentColor);transform:scale(1.06)}
+.gallery-info{padding:20px 22px;border-top:1px solid var(--border)}
+.gallery-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.gallery-name{font-family:var(--display);font-size:24px;letter-spacing:0.02em;color:var(--white);line-height:1;margin-bottom:4px}
+.gallery-client{font-size:13px;color:var(--muted)}
+
+.portfolio-cta{padding:80px 0;text-align:center;border-top:1px solid var(--border)}
+.portfolio-cta-text{font-family:var(--serif);font-size:clamp(24px,3vw,38px);color:var(--white);margin-bottom:28px;font-weight:400}
+.portfolio-cta-text em{color:var(--pink);font-style:italic;text-shadow:0 0 20px var(--pink-glow)}
+.btn-neon{font-family:var(--body);font-size:14px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--blue);color:#fff;border:none;padding:18px 40px;border-radius:40px;cursor:pointer;box-shadow:0 4px 20px var(--blue-glow);transition:background 0.3s,box-shadow 0.3s,transform 0.2s}
+.btn-neon:hover{background:#0A7FEF;box-shadow:0 6px 32px rgba(30,143,255,.4);transform:translateY(-2px)}
