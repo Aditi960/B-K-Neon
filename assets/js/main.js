@@ -30,8 +30,26 @@ document.querySelectorAll('a,button,.product-card').forEach(el => {
 
 /* ── Nav scroll behaviour ──────────────────── */
 const nav = document.getElementById('nav');
+let lastY = 0, isNavHovered = false, mouseY = 0, scrollDir = 0;
+
+nav.addEventListener('mouseenter', () => isNavHovered = true);
+nav.addEventListener('mouseleave', () => { isNavHovered = false; updateNav(); });
+document.addEventListener('mousemove', e => { mouseY = e.clientY; updateNav(); });
+
+function updateNav() {
+    if (isNavHovered || mouseY <= 90 || lastY <= 120 || scrollDir === -1) {
+        gsap.to(nav, { y: 0, duration: 0.38, ease: 'power2.out', overwrite: 'auto' });
+    } else if (scrollDir === 1 && lastY > 120) {
+        gsap.to(nav, { y: -80, duration: 0.45, ease: 'power2.inOut', overwrite: 'auto' });
+    }
+}
+
 lenis.on('scroll', ({ scroll }) => {
-  nav.classList.toggle('solid', scroll > 60);
+    nav.classList.toggle('solid', scroll > 60);
+    if (scroll > lastY) scrollDir = 1;
+    else if (scroll < lastY) scrollDir = -1;
+    lastY = scroll;
+    updateNav();
 });
 
 /* ── Hero entrance ─────────────────────────── */
@@ -55,16 +73,7 @@ gsap.from('#neonSign', {
   x: 80, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.4
 });
 
-/* ── Nav hide on scroll down ───────────────── */
-let lastY = 0;
-lenis.on('scroll', ({ scroll }) => {
-  if (scroll > lastY && scroll > 120) {
-    gsap.to(nav, { y: -80, duration: 0.45, ease: 'power2.inOut' });
-  } else {
-    gsap.to(nav, { y: 0, duration: 0.38, ease: 'power2.out' });
-  }
-  lastY = scroll;
-});
+/* ── Nav hide on scroll down (handled above) ─── */
 
 /* ── Blob parallax ─────────────────────────── */
 gsap.to('.blob-1', {

@@ -30,13 +30,13 @@ html {
   --blue-glow2: rgba(30, 143, 255, 0.12);
   --cyan: #00D4FF;
   --white: #FFFFFF;
-  --gray: rgba(255, 255, 255, 0.55);
-  --gray2: rgba(255, 255, 255, 0.32);
+  --gray: rgba(255, 255, 255, 0.80);
+  --gray2: rgba(255, 255, 255, 0.55);
 
   /* legacy aliases used in new sections */
   --ink: #FFFFFF;
-  --ink2: rgba(255, 255, 255, 0.75);
-  --muted: rgba(255, 255, 255, 0.45);
+  --ink2: rgba(255, 255, 255, 0.85);
+  --muted: rgba(255, 255, 255, 0.65);
 
   --display: 'Bebas Neue', sans-serif;
   --serif: 'DM Serif Display', Georgia, serif;
@@ -199,7 +199,7 @@ nav.solid {
 .nav-links a {
   font-size: 13px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.04em;
   transition: color .25s;
 }
@@ -1230,7 +1230,7 @@ footer {
 
 .footer-sub {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.7;
 }
 
@@ -1238,7 +1238,7 @@ footer {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: 16px;
 }
 
@@ -1252,7 +1252,7 @@ footer {
 
 .f-links a {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.75);
   transition: color 0.3s;
 }
 
@@ -1265,7 +1265,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.45);
   letter-spacing: 0.06em;
 }
 

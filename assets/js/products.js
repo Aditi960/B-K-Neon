@@ -16,8 +16,25 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; gs
 (function lerp() { rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(lerp); })();
 
 /* ── Navbar scroll ─────────────────────── */
-const nav = document.getElementById('nav'); let lastY = 0;
-lenis.on('scroll', ({ scroll }) => { nav.classList.toggle('solid', scroll > 60); if (scroll > lastY && scroll > 120) gsap.to(nav, { y: -80, duration: 0.45, ease: 'power2.inOut' }); else gsap.to(nav, { y: 0, duration: 0.38, ease: 'power2.out' }); lastY = scroll; });
+const nav = document.getElementById('nav');
+let lastY = 0, isNavHovered = false, mouseY = 0, scrollDir = 0;
+nav.addEventListener('mouseenter', () => isNavHovered = true);
+nav.addEventListener('mouseleave', () => { isNavHovered = false; updateNav(); });
+document.addEventListener('mousemove', e => { mouseY = e.clientY; updateNav(); });
+function updateNav() {
+    if (isNavHovered || mouseY <= 90 || lastY <= 120 || scrollDir === -1) {
+        gsap.to(nav, { y: 0, duration: 0.38, ease: 'power2.out', overwrite: 'auto' });
+    } else if (scrollDir === 1 && lastY > 120) {
+        gsap.to(nav, { y: -80, duration: 0.45, ease: 'power2.inOut', overwrite: 'auto' });
+    }
+}
+lenis.on('scroll', ({ scroll }) => {
+    nav.classList.toggle('solid', scroll > 60);
+    if (scroll > lastY) scrollDir = 1;
+    else if (scroll < lastY) scrollDir = -1;
+    lastY = scroll;
+    updateNav();
+});
 
 /* ── Page header animations ────────────── */
 gsap.set('#pageEyebrow', { opacity: 0, y: 14 }); gsap.set('#pageTitle', { opacity: 0, y: 30 }); gsap.set('#pageSubtitle', { opacity: 0, y: 20 });
