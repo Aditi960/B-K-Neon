@@ -1,407 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Process — B.K. Neon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process — B.K. Neon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/process.css">
 </head>
+
 <body>
-<div id="cur-dot"></div>
-<div id="cur-ring"></div>
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
 
-<nav id="nav">
-  <div class="nav-brand">
-    <div class="nav-logo-row">
-      <div class="nav-pip"></div>
-      <a href="index.html"><span class="nav-name">B.K <span>NEON</span></span></a>
+  <nav id="nav">
+    <div class="nav-brand">
+      <div class="nav-logo-row">
+        <div class="nav-pip"></div>
+        <a href="index.html"><span class="nav-name">B.K <span>NEON</span></span></a>
+      </div>
+      <div class="nav-sub">Custom Neon &amp; LED Signage</div>
     </div>
-    <div class="nav-sub">Custom Neon &amp; LED Signage</div>
+    <ul class="nav-links">
+      <li><a href="work.html">Work</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="process.html" class="active">Process</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="page-header">
+    <div class="hero-glow-a"></div>
+    <div class="hero-glow-b"></div>
+
+    <div class="ph-left">
+      <p class="ph-eyebrow" id="phEyebrow"><span class="pip"></span> How it works</p>
+      <h1 class="ph-title" id="phTitle">HOW WE BRING<br>YOUR SIGN<br>TO <span class="accent">LIFE.</span></h1>
+      <p class="ph-body" id="phBody">
+        From your first message to the moment your sign lights up — every step is <em>designed around you.</em> Custom
+        design, hand fabrication, and pan-India delivery in as few as 7 days.
+      </p>
+      <div class="ph-stats" id="phStats">
+        <div class="ph-stat"><strong>5</strong><span>Simple steps</span></div>
+        <div class="ph-stat"><strong>7</strong><span>Days avg. delivery</span></div>
+        <div class="ph-stat"><strong>100%</strong><span>Custom every time</span></div>
+      </div>
+    </div>
+
+    <div class="ph-right" id="phRight">
+      <!-- Neon process schematic illustration -->
+      <div class="process-schematic">
+        <svg class="schematic-svg" viewBox="0 0 460 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid dots -->
+          <g opacity="0.18">
+            <circle cx="40" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="120" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="200" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="280" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="360" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="440" cy="40" r="2" fill="#1E8FFF" />
+            <circle cx="40" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="120" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="200" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="280" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="360" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="440" cy="120" r="2" fill="#1E8FFF" />
+            <circle cx="40" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="120" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="200" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="280" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="360" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="440" cy="200" r="2" fill="#1E8FFF" />
+            <circle cx="40" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="120" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="200" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="280" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="360" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="440" cy="280" r="2" fill="#1E8FFF" />
+            <circle cx="40" cy="360" r="2" fill="#1E8FFF" />
+            <circle cx="120" cy="360" r="2" fill="#1E8FFF" />
+            <circle cx="200" cy="360" r="2" fill="#1E8FFF" />
+            <circle cx="280" cy="360" r="2" fill="#1E8FFF" />
+            <circle cx="360" cy="360" r="2" fill="#1E8FFF" />
+            <circle cx="440" cy="360" r="2" fill="#1E8FFF" />
+          </g>
+          <!-- Connector lines (flow path) -->
+          <path d="M230 60 L230 340" stroke="rgba(30,143,255,0.12)" stroke-width="1" stroke-dasharray="4 6" />
+          <!-- Step 1 node -->
+          <circle cx="230" cy="72" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7"
+            fill="rgba(30,143,255,0.06)" />
+          <circle cx="230" cy="72" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none" />
+          <text x="230" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF"
+            opacity="0.9">01</text>
+          <!-- Step 2 node -->
+          <circle cx="230" cy="144" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65"
+            fill="rgba(255,45,155,0.05)" />
+          <circle cx="230" cy="144" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none" />
+          <text x="230" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B"
+            opacity="0.9">02</text>
+          <!-- Step 3 node -->
+          <circle cx="230" cy="216" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7"
+            fill="rgba(30,143,255,0.06)" />
+          <circle cx="230" cy="216" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none" />
+          <text x="230" y="222" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF"
+            opacity="0.9">03</text>
+          <!-- Step 4 node -->
+          <circle cx="230" cy="288" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65"
+            fill="rgba(255,45,155,0.05)" />
+          <circle cx="230" cy="288" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none" />
+          <text x="230" y="294" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B"
+            opacity="0.9">04</text>
+          <!-- Step 5 node -->
+          <circle cx="230" cy="360" r="26" stroke="#1E8FFF" stroke-width="2" stroke-opacity="0.85"
+            fill="rgba(30,143,255,0.1)" />
+          <circle cx="230" cy="360" r="18" stroke="#1E8FFF" stroke-width="0.8" stroke-opacity="0.4" fill="none" />
+          <text x="230" y="366" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF"
+            opacity="0.95">05</text>
+          <!-- Horizontal label lines left -->
+          <line x1="68" y1="72" x2="204" y2="72" stroke="rgba(30,143,255,0.25)" stroke-width="1" />
+          <circle cx="68" cy="72" r="3" fill="#1E8FFF" fill-opacity="0.5" />
+          <line x1="68" y1="216" x2="204" y2="216" stroke="rgba(30,143,255,0.25)" stroke-width="1" />
+          <circle cx="68" cy="216" r="3" fill="#1E8FFF" fill-opacity="0.5" />
+          <line x1="68" y1="360" x2="200" y2="360" stroke="rgba(30,143,255,0.25)" stroke-width="1" />
+          <circle cx="68" cy="360" r="3" fill="#1E8FFF" fill-opacity="0.5" />
+          <!-- Horizontal label lines right -->
+          <line x1="256" y1="144" x2="392" y2="144" stroke="rgba(255,45,155,0.22)" stroke-width="1" />
+          <circle cx="392" cy="144" r="3" fill="#FF2D9B" fill-opacity="0.45" />
+          <line x1="256" y1="288" x2="392" y2="288" stroke="rgba(255,45,155,0.22)" stroke-width="1" />
+          <circle cx="392" cy="288" r="3" fill="#FF2D9B" fill-opacity="0.45" />
+          <!-- Label texts left -->
+          <text x="60" y="60" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="14"
+            letter-spacing="1.5" fill="rgba(255,255,255,0.95)">IDEA</text>
+          <text x="60" y="204" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="14"
+            letter-spacing="1.5" fill="rgba(255,255,255,0.95)">APPROVAL</text>
+          <text x="60" y="348" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="14"
+            letter-spacing="1.5" fill="rgba(255,255,255,0.95)">DELIVERY</text>
+          <!-- Label texts right -->
+          <text x="400" y="132" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="14"
+            letter-spacing="1.5" fill="rgba(255,255,255,0.95)">DESIGN</text>
+          <text x="400" y="276" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="14"
+            letter-spacing="1.5" fill="rgba(255,255,255,0.95)">PRODUCTION</text>
+          <!-- Glow highlight on final node -->
+          <circle cx="230" cy="360" r="36" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.2" fill="none" />
+          <circle cx="230" cy="360" r="50" stroke="#1E8FFF" stroke-width="0.3" stroke-opacity="0.1" fill="none" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STEP-BY-STEP PROCESS ══ -->
+  <section class="steps-section">
+    <div class="section-wrap">
+      <div class="steps-header">
+        <div class="section-label">The process</div>
+        <h2 class="section-title" id="stepsTitle">5 STEPS TO<br>YOUR SIGN</h2>
+      </div>
+      <div class="steps-list" id="stepsList">
+
+        <!-- Step 1 — left -->
+        <div class="step-row blue" id="step0">
+          <div class="step-content">
+            <div class="step-icon">💡</div>
+            <div class="step-num">01</div>
+            <div class="step-title">Idea &amp; Requirement</div>
+            <div class="step-desc">Tell us what you need — a word, a logo, a vibe. Send us a reference, a sketch, or
+              just a message. We handle the rest from scratch.</div>
+          </div>
+          <div class="step-center">
+            <div class="step-node">01</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content mobile-show"></div>
+        </div>
+
+        <!-- Step 2 — right -->
+        <div class="step-row pink" id="step1">
+          <div class="step-content mobile-show"></div>
+          <div class="step-center">
+            <div class="step-connector"></div>
+            <div class="step-node">02</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-icon">🎨</div>
+            <div class="step-num">02</div>
+            <div class="step-title">Design Preview</div>
+            <div class="step-desc">Our design team creates a full digital mockup with exact colours, font, dimensions,
+              and backboard style — free, before you commit.</div>
+          </div>
+        </div>
+
+        <!-- Step 3 — left -->
+        <div class="step-row blue" id="step2">
+          <div class="step-content">
+            <div class="step-icon">✅</div>
+            <div class="step-num">03</div>
+            <div class="step-title">Approval</div>
+            <div class="step-desc">Review your mockup and request any changes — colours, sizing, layout. We iterate
+              until you're fully satisfied, then confirm with a 50% advance.</div>
+          </div>
+          <div class="step-center">
+            <div class="step-connector"></div>
+            <div class="step-node">03</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content mobile-show"></div>
+        </div>
+
+        <!-- Step 4 — right -->
+        <div class="step-row pink" id="step3">
+          <div class="step-content mobile-show"></div>
+          <div class="step-center">
+            <div class="step-connector"></div>
+            <div class="step-node">04</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-icon">⚡</div>
+            <div class="step-num">04</div>
+            <div class="step-title">Production</div>
+            <div class="step-desc">Your sign is hand-fabricated in our Pune workshop — tube bent, LED wired, backboard
+              cut, and tested for full brightness before packing.</div>
+          </div>
+        </div>
+
+        <!-- Step 5 — left -->
+        <div class="step-row blue" id="step4">
+          <div class="step-content">
+            <div class="step-icon">🚚</div>
+            <div class="step-num">05</div>
+            <div class="step-title">Delivery</div>
+            <div class="step-desc">Safely packed and shipped anywhere in India. Local Pune orders can opt for
+              installation by our team. Includes full wiring guide and remote dimmer.</div>
+          </div>
+          <div class="step-center">
+            <div class="step-connector"></div>
+            <div class="step-node">05</div>
+          </div>
+          <div class="step-content mobile-show"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WORKFLOW CARDS ══ -->
+  <section class="workflow-section">
+    <div class="section-wrap">
+      <div class="workflow-header">
+        <div class="section-label" style="--blue:#1E8FFF">Detailed breakdown</div>
+        <h2 class="section-title" id="workflowTitle">WHAT HAPPENS<br>AT EACH STEP</h2>
+      </div>
+      <div class="workflow-grid">
+
+        <div class="workflow-card blue" id="wcard0">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">STEP 01</div>
+            <div class="wcard-icon">💡</div>
+            <div class="wcard-title">Idea &amp; Requirement</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>Share text, logo, reference images or a rough sketch via WhatsApp or email</li>
+              <li>We confirm size, placement, and colour options with you</li>
+              <li>No commitment needed — first consultation is always free</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">Same day reply</span>
+            <span class="wcard-tag">Free</span>
+          </div>
+        </div>
+
+        <div class="workflow-card pink" id="wcard1">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">STEP 02</div>
+            <div class="wcard-icon">🎨</div>
+            <div class="wcard-title">Design Preview</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>Digital mockup created with accurate colours, font, and dimensions</li>
+              <li>Preview shown on a dark background to simulate real glow effect</li>
+              <li>Revisions included until you're completely happy</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">1–2 days</span>
+            <span class="wcard-tag">Free</span>
+          </div>
+        </div>
+
+        <div class="workflow-card blue" id="wcard2">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">STEP 03</div>
+            <div class="wcard-icon">✅</div>
+            <div class="wcard-title">Approval</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>Final quote issued — no hidden charges or surprise markups</li>
+              <li>Confirm design and pay 50% advance to begin production</li>
+              <li>Production timeline communicated clearly at this stage</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">1 day</span>
+            <span class="wcard-tag">50% advance</span>
+          </div>
+        </div>
+
+        <div class="workflow-card pink" id="wcard3">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">STEP 04</div>
+            <div class="wcard-icon">⚡</div>
+            <div class="wcard-title">Production</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>Neon tube hand-bent or LED flex cut to exact design specifications</li>
+              <li>Acrylic or wooden backboard cut, drilled, and finished in-house</li>
+              <li>Full brightness test and quality check before dispatch</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">3–5 days</span>
+            <span class="wcard-tag">Pune workshop</span>
+          </div>
+        </div>
+
+        <div class="workflow-card blue" id="wcard4">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">STEP 05</div>
+            <div class="wcard-icon">🚚</div>
+            <div class="wcard-title">Delivery</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>Carefully packed with foam lining for safe pan-India shipping</li>
+              <li>Tracking link shared — balance payment collected on delivery</li>
+              <li>Installation guide, remote dimmer, and warranty card included</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">1–2 days shipping</span>
+            <span class="wcard-tag">Pan-India</span>
+          </div>
+        </div>
+
+        <div class="workflow-card pink" id="wcard5">
+          <div class="wcard-head">
+            <div class="wcard-step-badge">AFTER DELIVERY</div>
+            <div class="wcard-icon">🔆</div>
+            <div class="wcard-title">Aftercare</div>
+          </div>
+          <div class="wcard-body">
+            <ul class="wcard-bullets">
+              <li>12-month warranty on LED drivers and all electrical components</li>
+              <li>WhatsApp support for installation questions — always available</li>
+              <li>Pune clients get free on-site service within the warranty period</li>
+            </ul>
+          </div>
+          <div class="wcard-footer">
+            <span class="wcard-timeline">12-month warranty</span>
+            <span class="wcard-tag">Included</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS STRIP ══ -->
+  <div class="stats-strip">
+    <div class="section-wrap">
+      <div class="stats-grid">
+        <div class="stat-block" id="stat0">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Signs Installed</div>
+        </div>
+        <div class="stat-block" id="stat1">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Day Avg. Delivery</div>
+        </div>
+        <div class="stat-block" id="stat2">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Custom Design</div>
+        </div>
+        <div class="stat-block" id="stat3">
+          <div class="stat-num">28+</div>
+          <div class="stat-label">Cities Delivered</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="work.html">Work</a></li>
-    <li><a href="products.html">Products</a></li>
-    <li><a href="process.html" class="active">Process</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="#" class="nav-cta">Get a Quote</a></li>
-  </ul>
-</nav>
 
-<!-- ══ HERO ══ -->
-<section class="page-header">
-  <div class="hero-glow-a"></div>
-  <div class="hero-glow-b"></div>
-
-  <div class="ph-left">
-    <p class="ph-eyebrow" id="phEyebrow"><span class="pip"></span> How it works</p>
-    <h1 class="ph-title" id="phTitle">HOW WE BRING<br>YOUR SIGN<br>TO <span class="accent">LIFE.</span></h1>
-    <p class="ph-body" id="phBody">
-      From your first message to the moment your sign lights up — every step is <em>designed around you.</em> Custom design, hand fabrication, and pan-India delivery in as few as 7 days.
-    </p>
-    <div class="ph-stats" id="phStats">
-      <div class="ph-stat"><strong>5</strong><span>Simple steps</span></div>
-      <div class="ph-stat"><strong>7</strong><span>Days avg. delivery</span></div>
-      <div class="ph-stat"><strong>100%</strong><span>Custom every time</span></div>
-    </div>
-  </div>
-
-  <div class="ph-right" id="phRight">
-    <!-- Neon process schematic illustration -->
-    <div class="process-schematic">
-      <svg class="schematic-svg" viewBox="0 0 460 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Grid dots -->
-        <g opacity="0.18">
-          <circle cx="40" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="120" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="200" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="280" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="360" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="440" cy="40" r="2" fill="#1E8FFF"/>
-          <circle cx="40" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="120" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="200" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="280" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="360" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="440" cy="120" r="2" fill="#1E8FFF"/>
-          <circle cx="40" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="120" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="200" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="280" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="360" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="440" cy="200" r="2" fill="#1E8FFF"/>
-          <circle cx="40" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="120" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="200" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="280" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="360" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="440" cy="280" r="2" fill="#1E8FFF"/>
-          <circle cx="40" cy="360" r="2" fill="#1E8FFF"/>
-          <circle cx="120" cy="360" r="2" fill="#1E8FFF"/>
-          <circle cx="200" cy="360" r="2" fill="#1E8FFF"/>
-          <circle cx="280" cy="360" r="2" fill="#1E8FFF"/>
-          <circle cx="360" cy="360" r="2" fill="#1E8FFF"/>
-          <circle cx="440" cy="360" r="2" fill="#1E8FFF"/>
-        </g>
-        <!-- Connector lines (flow path) -->
-        <path d="M230 60 L230 340" stroke="rgba(30,143,255,0.12)" stroke-width="1" stroke-dasharray="4 6"/>
-        <!-- Step 1 node -->
-        <circle cx="230" cy="72" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7" fill="rgba(30,143,255,0.06)"/>
-        <circle cx="230" cy="72" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
-        <text x="230" y="78" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.9">01</text>
-        <!-- Step 2 node -->
-        <circle cx="230" cy="144" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65" fill="rgba(255,45,155,0.05)"/>
-        <circle cx="230" cy="144" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none"/>
-        <text x="230" y="150" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B" opacity="0.9">02</text>
-        <!-- Step 3 node -->
-        <circle cx="230" cy="216" r="22" stroke="#1E8FFF" stroke-width="1.5" stroke-opacity="0.7" fill="rgba(30,143,255,0.06)"/>
-        <circle cx="230" cy="216" r="16" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
-        <text x="230" y="222" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.9">03</text>
-        <!-- Step 4 node -->
-        <circle cx="230" cy="288" r="22" stroke="#FF2D9B" stroke-width="1.5" stroke-opacity="0.65" fill="rgba(255,45,155,0.05)"/>
-        <circle cx="230" cy="288" r="16" stroke="#FF2D9B" stroke-width="0.5" stroke-opacity="0.28" fill="none"/>
-        <text x="230" y="294" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#FF2D9B" opacity="0.9">04</text>
-        <!-- Step 5 node -->
-        <circle cx="230" cy="360" r="26" stroke="#1E8FFF" stroke-width="2" stroke-opacity="0.85" fill="rgba(30,143,255,0.1)"/>
-        <circle cx="230" cy="360" r="18" stroke="#1E8FFF" stroke-width="0.8" stroke-opacity="0.4" fill="none"/>
-        <text x="230" y="366" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#1E8FFF" opacity="0.95">05</text>
-        <!-- Horizontal label lines left -->
-        <line x1="68" y1="72" x2="204" y2="72" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
-        <circle cx="68" cy="72" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
-        <line x1="68" y1="216" x2="204" y2="216" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
-        <circle cx="68" cy="216" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
-        <line x1="68" y1="360" x2="200" y2="360" stroke="rgba(30,143,255,0.25)" stroke-width="1"/>
-        <circle cx="68" cy="360" r="3" fill="#1E8FFF" fill-opacity="0.5"/>
-        <!-- Horizontal label lines right -->
-        <line x1="256" y1="144" x2="392" y2="144" stroke="rgba(255,45,155,0.22)" stroke-width="1"/>
-        <circle cx="392" cy="144" r="3" fill="#FF2D9B" fill-opacity="0.45"/>
-        <line x1="256" y1="288" x2="392" y2="288" stroke="rgba(255,45,155,0.22)" stroke-width="1"/>
-        <circle cx="392" cy="288" r="3" fill="#FF2D9B" fill-opacity="0.45"/>
-        <!-- Label texts left -->
-        <text x="60" y="60" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">IDEA</text>
-        <text x="60" y="204" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">APPROVAL</text>
-        <text x="60" y="348" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">DELIVERY</text>
-        <!-- Label texts right -->
-        <text x="400" y="132" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">DESIGN</text>
-        <text x="400" y="276" text-anchor="start" font-family="'Bebas Neue',sans-serif" font-size="11" letter-spacing="1.5" fill="rgba(255,255,255,0.45)">PRODUCTION</text>
-        <!-- Glow highlight on final node -->
-        <circle cx="230" cy="360" r="36" stroke="#1E8FFF" stroke-width="0.5" stroke-opacity="0.2" fill="none"/>
-        <circle cx="230" cy="360" r="50" stroke="#1E8FFF" stroke-width="0.3" stroke-opacity="0.1" fill="none"/>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- ══ STEP-BY-STEP PROCESS ══ -->
-<section class="steps-section">
-  <div class="section-wrap">
-    <div class="steps-header">
-      <div class="section-label">The process</div>
-      <h2 class="section-title" id="stepsTitle">5 STEPS TO<br>YOUR SIGN</h2>
-    </div>
-    <div class="steps-list" id="stepsList">
-
-      <!-- Step 1 — left -->
-      <div class="step-row blue" id="step0">
-        <div class="step-content">
-          <div class="step-icon">💡</div>
-          <div class="step-num">01</div>
-          <div class="step-title">Idea &amp; Requirement</div>
-          <div class="step-desc">Tell us what you need — a word, a logo, a vibe. Send us a reference, a sketch, or just a message. We handle the rest from scratch.</div>
-        </div>
-        <div class="step-center">
-          <div class="step-node">01</div>
-          <div class="step-connector"></div>
-        </div>
-        <div class="step-content mobile-show"></div>
-      </div>
-
-      <!-- Step 2 — right -->
-      <div class="step-row pink" id="step1">
-        <div class="step-content mobile-show"></div>
-        <div class="step-center">
-          <div class="step-connector"></div>
-          <div class="step-node">02</div>
-          <div class="step-connector"></div>
-        </div>
-        <div class="step-content">
-          <div class="step-icon">🎨</div>
-          <div class="step-num">02</div>
-          <div class="step-title">Design Preview</div>
-          <div class="step-desc">Our design team creates a full digital mockup with exact colours, font, dimensions, and backboard style — free, before you commit.</div>
-        </div>
-      </div>
-
-      <!-- Step 3 — left -->
-      <div class="step-row blue" id="step2">
-        <div class="step-content">
-          <div class="step-icon">✅</div>
-          <div class="step-num">03</div>
-          <div class="step-title">Approval</div>
-          <div class="step-desc">Review your mockup and request any changes — colours, sizing, layout. We iterate until you're fully satisfied, then confirm with a 50% advance.</div>
-        </div>
-        <div class="step-center">
-          <div class="step-connector"></div>
-          <div class="step-node">03</div>
-          <div class="step-connector"></div>
-        </div>
-        <div class="step-content mobile-show"></div>
-      </div>
-
-      <!-- Step 4 — right -->
-      <div class="step-row pink" id="step3">
-        <div class="step-content mobile-show"></div>
-        <div class="step-center">
-          <div class="step-connector"></div>
-          <div class="step-node">04</div>
-          <div class="step-connector"></div>
-        </div>
-        <div class="step-content">
-          <div class="step-icon">⚡</div>
-          <div class="step-num">04</div>
-          <div class="step-title">Production</div>
-          <div class="step-desc">Your sign is hand-fabricated in our Pune workshop — tube bent, LED wired, backboard cut, and tested for full brightness before packing.</div>
-        </div>
-      </div>
-
-      <!-- Step 5 — left -->
-      <div class="step-row blue" id="step4">
-        <div class="step-content">
-          <div class="step-icon">🚚</div>
-          <div class="step-num">05</div>
-          <div class="step-title">Delivery</div>
-          <div class="step-desc">Safely packed and shipped anywhere in India. Local Pune orders can opt for installation by our team. Includes full wiring guide and remote dimmer.</div>
-        </div>
-        <div class="step-center">
-          <div class="step-connector"></div>
-          <div class="step-node">05</div>
-        </div>
-        <div class="step-content mobile-show"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ WORKFLOW CARDS ══ -->
-<section class="workflow-section">
-  <div class="section-wrap">
-    <div class="workflow-header">
-      <div class="section-label" style="--blue:#1E8FFF">Detailed breakdown</div>
-      <h2 class="section-title" id="workflowTitle">WHAT HAPPENS<br>AT EACH STEP</h2>
-    </div>
-    <div class="workflow-grid">
-
-      <div class="workflow-card blue" id="wcard0">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">STEP 01</div>
-          <div class="wcard-icon">💡</div>
-          <div class="wcard-title">Idea &amp; Requirement</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>Share text, logo, reference images or a rough sketch via WhatsApp or email</li>
-            <li>We confirm size, placement, and colour options with you</li>
-            <li>No commitment needed — first consultation is always free</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">Same day reply</span>
-          <span class="wcard-tag">Free</span>
-        </div>
-      </div>
-
-      <div class="workflow-card pink" id="wcard1">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">STEP 02</div>
-          <div class="wcard-icon">🎨</div>
-          <div class="wcard-title">Design Preview</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>Digital mockup created with accurate colours, font, and dimensions</li>
-            <li>Preview shown on a dark background to simulate real glow effect</li>
-            <li>Revisions included until you're completely happy</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">1–2 days</span>
-          <span class="wcard-tag">Free</span>
-        </div>
-      </div>
-
-      <div class="workflow-card blue" id="wcard2">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">STEP 03</div>
-          <div class="wcard-icon">✅</div>
-          <div class="wcard-title">Approval</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>Final quote issued — no hidden charges or surprise markups</li>
-            <li>Confirm design and pay 50% advance to begin production</li>
-            <li>Production timeline communicated clearly at this stage</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">1 day</span>
-          <span class="wcard-tag">50% advance</span>
-        </div>
-      </div>
-
-      <div class="workflow-card pink" id="wcard3">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">STEP 04</div>
-          <div class="wcard-icon">⚡</div>
-          <div class="wcard-title">Production</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>Neon tube hand-bent or LED flex cut to exact design specifications</li>
-            <li>Acrylic or wooden backboard cut, drilled, and finished in-house</li>
-            <li>Full brightness test and quality check before dispatch</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">3–5 days</span>
-          <span class="wcard-tag">Pune workshop</span>
-        </div>
-      </div>
-
-      <div class="workflow-card blue" id="wcard4">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">STEP 05</div>
-          <div class="wcard-icon">🚚</div>
-          <div class="wcard-title">Delivery</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>Carefully packed with foam lining for safe pan-India shipping</li>
-            <li>Tracking link shared — balance payment collected on delivery</li>
-            <li>Installation guide, remote dimmer, and warranty card included</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">1–2 days shipping</span>
-          <span class="wcard-tag">Pan-India</span>
-        </div>
-      </div>
-
-      <div class="workflow-card pink" id="wcard5">
-        <div class="wcard-head">
-          <div class="wcard-step-badge">AFTER DELIVERY</div>
-          <div class="wcard-icon">🔆</div>
-          <div class="wcard-title">Aftercare</div>
-        </div>
-        <div class="wcard-body">
-          <ul class="wcard-bullets">
-            <li>12-month warranty on LED drivers and all electrical components</li>
-            <li>WhatsApp support for installation questions — always available</li>
-            <li>Pune clients get free on-site service within the warranty period</li>
-          </ul>
-        </div>
-        <div class="wcard-footer">
-          <span class="wcard-timeline">12-month warranty</span>
-          <span class="wcard-tag">Included</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ STATS STRIP ══ -->
-<div class="stats-strip">
-  <div class="section-wrap">
-    <div class="stats-grid">
-      <div class="stat-block" id="stat0">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Signs Installed</div>
-      </div>
-      <div class="stat-block" id="stat1">
-        <div class="stat-num">7</div>
-        <div class="stat-label">Day Avg. Delivery</div>
-      </div>
-      <div class="stat-block" id="stat2">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Custom Design</div>
-      </div>
-      <div class="stat-block" id="stat3">
-        <div class="stat-num">28+</div>
-        <div class="stat-label">Cities Delivered</div>
+  <!-- ══ CTA ══ -->
+  <section class="cta-section">
+    <div class="cta-blob"></div>
+    <div class="section-wrap" style="position:relative;z-index:2">
+      <p class="cta-eyebrow" id="ctaEyebrow">Start your project today</p>
+      <h2 class="cta-title" id="ctaTitle">READY TO LIGHT UP<br>YOUR <span class="neon-word">BRAND?</span></h2>
+      <div class="cta-actions" id="ctaActions">
+        <a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer" class="btn-neon-lg">Get Quote on
+          WhatsApp</a>
+        <a href="work.html" class="btn-ghost-lg">View Our Work</a>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ══ CTA ══ -->
-<section class="cta-section">
-  <div class="cta-blob"></div>
-  <div class="section-wrap" style="position:relative;z-index:2">
-    <p class="cta-eyebrow" id="ctaEyebrow">Start your project today</p>
-    <h2 class="cta-title" id="ctaTitle">READY TO LIGHT UP<br>YOUR <span class="neon-word">BRAND?</span></h2>
-    <div class="cta-actions" id="ctaActions">
-      <a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer" class="btn-neon-lg">Get Quote on WhatsApp</a>
-      <a href="work.html" class="btn-ghost-lg">View Our Work</a>
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">B.K.<span> NEON</span></div>
+        <p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p>
+      </div>
+      <div>
+        <div class="f-col-title">Services</div>
+        <ul class="f-links">
+          <li><a href="#">Custom Neon Signs</a></li>
+          <li><a href="#">LED Sign Boards</a></li>
+          <li><a href="#">Shop Signage</a></li>
+          <li><a href="#">Wedding Neon</a></li>
+          <li><a href="#">Event Decor</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title">Contact</div>
+        <ul class="f-links">
+          <li><a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">hello@bkneon.in</a></li>
+          <li><a href="#">Pune, MH</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
+    <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
+  </footer>
 
-<footer>
-  <div class="footer-top">
-    <div><div class="footer-logo">B.K.<span> NEON</span></div><p class="footer-sub">Custom neon &amp; LED signage studio.<br>Pune, Maharashtra — serving all of India.</p></div>
-    <div><div class="f-col-title">Services</div><ul class="f-links"><li><a href="#">Custom Neon Signs</a></li><li><a href="#">LED Sign Boards</a></li><li><a href="#">Shop Signage</a></li><li><a href="#">Wedding Neon</a></li><li><a href="#">Event Decor</a></li></ul></div>
-    <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">hello@bkneon.in</a></li><li><a href="#">Pune, MH</a></li></ul></div>
-  </div>
-  <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
-</footer>
-
-<script src="assets/js/process.js"></script>
+  <script src="assets/js/process.js"></script>
 </body>
+
 </html>
