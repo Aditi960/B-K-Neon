@@ -202,10 +202,37 @@ nav.solid {
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.04em;
   transition: color .25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1.5px;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+  transition: width .3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-links a:hover {
   color: var(--white);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: var(--white);
+}
+
+.nav-links a.active::after {
+  width: 100%;
+  background: var(--pink);
+  box-shadow: 0 0 6px var(--pink);
 }
 
 .nav-cta {
@@ -1276,6 +1303,17 @@ footer {
 
 /* ── RESPONSIVE ─────────────────────────── */
 @media (max-width: 960px) {
+  /* Restore default cursor on touch/mobile */
+  body {
+    cursor: auto;
+  }
+
+  /* Hide custom cursor elements on mobile */
+  #cur-dot,
+  #cur-ring {
+    display: none;
+  }
+
   nav {
     padding: 16px 24px;
   }
@@ -1381,3 +1419,207 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── FLOATING WHATSAPP BUTTON ───────────── */
+.floating-wa {
+  position: fixed;
+  bottom: 30px;
+  right: 28px;
+  z-index: 980;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 22px 14px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow:
+    0 4px 24px rgba(37, 211, 102, 0.45),
+    0 0 0 0 rgba(37, 211, 102, 0);
+  animation: waGlowPulse 2.8s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+  will-change: transform;
+}
+
+.floating-wa:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow:
+    0 10px 36px rgba(37, 211, 102, 0.65),
+    0 0 0 0 rgba(37, 211, 102, 0);
+}
+
+.floating-wa svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.floating-wa-label {
+  white-space: nowrap;
+}
+
+@keyframes waGlowPulse {
+  0%, 100% {
+    box-shadow: 0 4px 24px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.35);
+  }
+  50% {
+    box-shadow: 0 6px 32px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.0);
+  }
+}
+
+/* Mobile: icon-only pill */
+@media (max-width: 960px) {
+  .floating-wa {
+    bottom: 24px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    justify-content: center;
+  }
+
+  .floating-wa-label {
+    display: none;
+  }
+}
+
+/* ── EXTENDED MOBILE FIXES ──────────────── */
+
+/* Prevent any horizontal overflow */
+html {
+  overflow-x: hidden;
+}
+
+/* ≤960px additions */
+@media (max-width: 960px) {
+
+  /* Hero stat cards — tighter on tablet */
+  .hero-stats {
+    gap: 16px;
+    row-gap: 12px;
+  }
+
+  .stat {
+    padding: 0 20px 0 0;
+  }
+
+  .stat:not(:first-child) {
+    padding-left: 20px;
+  }
+
+  /* Products section title */
+  .sec-title {
+    font-size: clamp(36px, 10vw, 64px);
+  }
+
+  /* HIW numbers */
+  .hiw-num {
+    font-size: 40px;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    padding: 56px 0;
+  }
+
+  /* CTA title */
+  .cta-title {
+    font-size: clamp(40px, 10vw, 100px);
+  }
+
+  /* Footer stack */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Btn widths */
+  .btn-neon-lg,
+  .btn-ghost-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* About strip */
+  .about-strip {
+    padding: 72px 0 56px;
+  }
+}
+
+/* ≤480px additions */
+@media (max-width: 480px) {
+
+  /* Nav padding tighter */
+  nav {
+    padding: 14px 16px;
+  }
+
+  nav.solid {
+    padding: 11px 16px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 80px 16px 40px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+  }
+
+  /* Stats — single column on very small */
+  .hero-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .stat:not(:first-child) {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .stat {
+    padding: 0;
+  }
+
+  /* Marquee smaller */
+  .mq-i {
+    font-size: 10px;
+    padding: 0 20px;
+  }
+
+  /* Section wrap */
+  .section-wrap {
+    padding: 0 16px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 16px 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 80px 0;
+  }
+
+  /* HIW */
+  .hiw-section {
+    padding: 64px 0;
+  }
+}

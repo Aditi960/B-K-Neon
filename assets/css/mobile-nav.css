@@ -1,0 +1,378 @@
+/* ══════════════════════════════════════════
+   MOBILE NAV — B.K. Neon
+   Premium fullscreen overlay with neon accents
+   ══════════════════════════════════════════ */
+
+/* ── Hamburger Button ───────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 210;
+  position: relative;
+  transition: background 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+}
+
+.nav-hamburger:hover {
+  background: rgba(255, 45, 155, 0.08);
+  border-color: rgba(255, 45, 155, 0.35);
+}
+
+.nav-hamburger .bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 0.25s ease,
+              width 0.3s ease;
+}
+
+/* Open state — X icon */
+.nav-hamburger.is-open .bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-hamburger.is-open .bar:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+.nav-hamburger.is-open .bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── Mobile Menu Overlay ────────────────── */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  /* Layered background: dark + glass blur */
+  background: rgba(8, 8, 14, 0.0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: background 0.45s ease, backdrop-filter 0.45s ease;
+}
+
+.mobile-menu-overlay.is-visible {
+  pointer-events: all;
+  background: rgba(8, 8, 14, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* ── Menu Panel ─────────────────────────── */
+.mobile-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(420px, 100vw);
+  height: 100%;
+  background: linear-gradient(
+    160deg,
+    rgba(15, 15, 26, 0.98) 0%,
+    rgba(10, 10, 18, 0.99) 100%
+  );
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transform: translateX(100%);
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Neon accent top edge */
+.mobile-menu-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--pink) 30%,
+    var(--blue) 70%,
+    transparent 100%);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Ambient glow inside panel */
+.mobile-menu-panel::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -30%;
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(ellipse,
+    rgba(255, 45, 155, 0.07) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Panel Header ───────────────────────── */
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.mobile-menu-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-menu-brand-name {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  line-height: 1;
+}
+
+.mobile-menu-brand-name span {
+  color: var(--pink);
+}
+
+.mobile-menu-brand-sub {
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray2);
+}
+
+.mobile-menu-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  line-height: 1;
+}
+
+.mobile-menu-close:hover {
+  background: rgba(255, 45, 155, 0.12);
+  border-color: rgba(255, 45, 155, 0.4);
+  color: var(--pink);
+}
+
+/* ── Navigation Links ───────────────────── */
+.mobile-nav-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 28px 28px;
+  list-style: none;
+  position: relative;
+  z-index: 2;
+  gap: 4px;
+}
+
+.mobile-nav-item {
+  opacity: 0;
+  transform: translateX(40px);
+  overflow: hidden;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--display);
+  font-size: clamp(36px, 9vw, 52px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: color 0.25s ease, padding-left 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.mobile-nav-link:last-child {
+  border-bottom: none;
+}
+
+/* Number counter label */
+.mobile-nav-num {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.28);
+  align-self: flex-end;
+  padding-bottom: 6px;
+  min-width: 22px;
+  transition: color 0.25s;
+}
+
+/* Hover state */
+.mobile-nav-link:hover {
+  color: var(--white);
+  padding-left: 8px;
+}
+
+.mobile-nav-link:hover .mobile-nav-num {
+  color: var(--pink);
+}
+
+/* Neon line reveal on hover */
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--blue) 100%);
+  box-shadow: 0 0 8px rgba(255, 45, 155, 0.5);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active page highlight */
+.mobile-nav-link.active {
+  color: var(--white);
+  text-shadow:
+    0 0 20px rgba(255, 45, 155, 0.45),
+    0 0 50px rgba(255, 45, 155, 0.18);
+}
+
+.mobile-nav-link.active .mobile-nav-num {
+  color: var(--pink);
+}
+
+/* Active neon underline always visible */
+.mobile-nav-link.active::after {
+  width: 100%;
+}
+
+/* ── CTA inside menu ────────────────────── */
+.mobile-menu-footer {
+  padding: 24px 28px 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.mobile-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+}
+
+.mobile-cta-btn.primary {
+  background: var(--pink);
+  color: var(--white);
+  border: none;
+  box-shadow: 0 0 24px rgba(255, 45, 155, 0.35);
+}
+
+.mobile-cta-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(255, 45, 155, 0.55);
+  background: #ff4daa;
+}
+
+.mobile-cta-btn.secondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.mobile-cta-btn.secondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* WA icon inside button */
+.mobile-cta-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Bottom location strip ──────────────── */
+.mobile-menu-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+}
+
+.mobile-menu-location::before {
+  content: '📍';
+  font-size: 12px;
+}
+
+/* ── Show only on mobile ─────────────────── */
+@media (max-width: 960px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* Prevent body scroll when menu is open */
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+}
+
+/* ── Desktop: hide everything mobile ──────── */
+@media (min-width: 961px) {
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: none !important;
+  }
+}

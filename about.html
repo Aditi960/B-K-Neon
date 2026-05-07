@@ -15,6 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css">
 </head>
 
 <body>
@@ -31,12 +32,48 @@
     </div>
     <ul class="nav-links">
       <li><a href="work.html">Work</a></li>
-      <li><a href="products.html">Products</a></li>
       <li><a href="process.html">Process</a></li>
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="#" class="nav-cta">Get a Quote</a></li>
     </ul>
+    <!-- Hamburger (mobile only) -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
   </nav>
+
+  <!-- ───── MOBILE MENU ───────────────────── -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <div class="mobile-menu-header">
+        <div class="mobile-menu-brand">
+          <div class="mobile-menu-brand-name">B.K <span>NEON</span></div>
+          <div class="mobile-menu-brand-sub">Custom Neon &amp; LED Signage</div>
+        </div>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&#x2715;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li class="mobile-nav-item">
+          <a class="mobile-nav-link" data-href="work.html"><span class="mobile-nav-num">01</span>Work</a>
+        </li>
+        <li class="mobile-nav-item">
+          <a class="mobile-nav-link" data-href="process.html"><span class="mobile-nav-num">02</span>Process</a>
+        </li>
+        <li class="mobile-nav-item">
+          <a class="mobile-nav-link active" data-href="about.html"><span class="mobile-nav-num">03</span>About</a>
+        </li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <a href="https://wa.me/918805745519?text=Hi%20B.K.%20Neon%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20enquire%20about%20custom%20signage." target="_blank" rel="noopener noreferrer" class="mobile-cta-btn primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Get Quote on WhatsApp
+        </a>
+        <div class="mobile-menu-location">Pune-Based &mdash; Delivered Across India</div>
+      </div>
+    </div>
+  </div>
 
   <!-- PAGE HERO -->
   <section class="page-header">
@@ -48,8 +85,8 @@
       <h1 class="ph-title" id="phTitle">LIGHT IS<br>OUR <span class="accent">CRAFT.</span></h1>
       <p class="ph-body" id="phBody">
         B.K. Neon started in Pune over <em>12 years ago</em> with a single workshop, a roll of neon tube, and a belief
-        that light has the power to transform any space. Today we're one of India's most trusted custom signage studios
-        — still hand-bending every sign in the same spirit we started with.
+        that light has the power to transform any space. Today, B.K. Neon continues to create custom neon and signage
+        work for businesses, shops, events, and interiors across different sectors.
       </p>
       <div class="ph-stats" id="phStats">
         <div class="ph-stat"><strong>500+</strong><span>Signs made</span></div>
@@ -72,16 +109,17 @@
           <h2 class="story-heading" id="storyHeading">Where it all <em>started.</em></h2>
         </div>
         <div class="story-body" id="storyBody">
-          <p>It started in 2012, when Umesh Thakare — the driving force behind the name — hand-bent his first neon sign
-            for
-            a neighbourhood pharmacy in Shivajinagar. The sign stayed on for <strong>eight years without a
-              repair</strong>. That durability became the foundation of everything we do.</p>
-          <p>What began as a one-man workshop grew into a <strong>full-service signage studio</strong>, adding LED
-            technology without ever abandoning the hand-craft tradition that gives our signs their character. Every tube
-            bend, every wire joint, every backboard cut is done in-house in our Pune workshop.</p>
-          <p>Today, B.K. Neon signs glow in café windows, wedding venues, brand offices, and living rooms from Mumbai to
-            Bangalore to Delhi. But we're still the same studio — just bigger. <strong>Every sign we make is still
-              custom. Still hand-made. Still Pune.</strong></p>
+          <p>It started in 2011, when B.K. Neon began working on local neon signage and custom sign boards for shops and
+            businesses around Pune. What started as small local work slowly grew through referrals, repeat clients, and
+            strong customer trust built through quality and durability.</p>
+
+          <p>Over the years, we expanded from traditional neon work into LED boards, acrylic signage, glow boards, flex
+            printing, showroom branding, hospital signage, and other commercial signage solutions — adapting with
+            changing industry trends while continuing hands-on fabrication work.</p>
+
+          <p>Today, B.K. Neon continues to create custom signage for shops, cafés, events, commercial spaces, and
+            businesses across different sectors. Every project is still handled with a focus on <strong>strong build
+              quality, clean finishing, durability, and practical custom work</strong> from our Pune workshop.</p>
         </div>
       </div>
     </div>
@@ -212,7 +250,8 @@
       <div class="team-grid">
         <div class="team-card blue" id="tm0">
           <div class="team-avatar has-photo">
-            <img src="assets/images/umesh-thakare.png" alt="Umesh Thakare — Founder of B.K. Neon" class="avatar-photo" />
+            <img src="assets/images/umesh-thakare.png" alt="Umesh Thakare — Founder of B.K. Neon"
+              class="avatar-photo" />
             <div class="avatar-glow"></div>
           </div>
           <div class="team-info">
@@ -247,8 +286,7 @@
       <p class="cta-eyebrow" id="ctaEyebrow">Let's make something together</p>
       <h2 class="cta-title" id="ctaTitle">YOUR SIGN<br>AWAITS <span class="neon-word">YOU.</span></h2>
       <div class="cta-actions" id="ctaActions">
-        <a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer" class="btn-neon-lg">Get a Quote
-          on WhatsApp</a>
+        <a href="https://wa.me/918805745519?text=Hi%20B.K.%20Neon%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20enquire%20about%20custom%20signage." target="_blank" rel="noopener noreferrer" class="btn-neon-lg">Get a Quote on WhatsApp</a>
         <a href="work.html" class="btn-ghost-lg">See our work</a>
       </div>
     </div>
@@ -273,17 +311,22 @@
       <div>
         <div class="f-col-title">Contact</div>
         <ul class="f-links">
-          <li><a href="https://wa.me/919881177410" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">hello@bkneon.in</a></li>
-          <li><a href="#">Pune, MH</a></li>
+          <li><a href="https://wa.me/918805745519?text=Hi%20B.K.%20Neon%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20enquire%20about%20custom%20signage." target="_blank" rel="noopener noreferrer">WhatsApp: 8805745519</a></li>
+          <li><a href="mailto:bkneon1@gmail.com">bkneon1@gmail.com</a></li>
+          <li><a href="https://maps.app.goo.gl/Qru6wiD696dLGihQA" target="_blank" rel="noopener noreferrer">Pune, Maharashtra</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom"><span>© 2024 B.K. Neon — All rights reserved</span><span>Handcrafted in Pune</span></div>
   </footer>
 
+  <a class="floating-wa" href="https://wa.me/918805745519?text=Hi%20B.K.%20Neon%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20enquire%20about%20custom%20signage." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="floating-wa-label">Get a Quote</span>
+  </a>
+
   <script src="assets/js/about.js"></script>
+  <script src="assets/js/mobile-nav.js"></script>
 </body>
 
 </html>
